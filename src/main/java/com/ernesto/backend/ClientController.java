@@ -1,6 +1,7 @@
 package com.ernesto.backend;
 
 import ch.qos.logback.core.net.server.Client;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +16,22 @@ import java.util.Date;
 @RequestMapping("/api/v1/clients")
 public class ClientController {
 
+    private ClientMapper clientMapper;
+
+    @Autowired
+    public ClientController(ClientMapper clientMapper){
+        this.clientMapper = clientMapper;
+    }
+
         @RequestMapping(
                 method = RequestMethod.POST,
                 produces = MediaType.APPLICATION_JSON_VALUE,
                 consumes = MediaType.APPLICATION_JSON_VALUE)
 
         public ResponseEntity<ClientDto> createClient(@RequestBody ClientDto clientDto){
-            System.out.println(clientDto);
-            clientDto.setBirthDate(new Date());
+            //System.out.println(clientDto);
+            //clientDto.setBirthDate(new Date());
+            clientMapper.create(clientDto);
             return new ResponseEntity<>(clientDto, HttpStatus.OK);
 
     }

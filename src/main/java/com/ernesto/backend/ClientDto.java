@@ -1,19 +1,48 @@
 package com.ernesto.backend;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class ClientDto {
     private Integer clientId;
     private String firstName;
     private String lastName;
     private Date birthDate;
-    private boolean Status;
+    private boolean status;
     private Integer txId;
     private Date txDate;
     private Integer txUserId;
     private String txHost;
 
     public ClientDto() {
+    }
+
+    @Override
+    public String toString() {
+        return "ClientDto{" +
+                "clientId=" + clientId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDate=" + birthDate +
+                ", Status=" + status +
+                ", txId=" + txId +
+                ", txDate=" + txDate +
+                ", txUserId=" + txUserId +
+                ", txHost='" + txHost + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClientDto clientDto = (ClientDto) o;
+        return clientId.equals(clientDto.clientId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(clientId);
     }
 
     public Integer getClientId() {
@@ -49,11 +78,11 @@ public class ClientDto {
     }
 
     public boolean isStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(boolean status) {
-        Status = status;
+        this.status = status;
     }
 
     public Integer getTxId() {

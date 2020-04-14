@@ -54,7 +54,7 @@ public class ClientController {
 
     @RequestMapping(
             path = "/{clientId}",
-            method = RequestMethod.GET,
+            method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity removeClient(@PathVariable("clientId") Integer clientId){
         clientMapper.deleteClient(clientId);
@@ -63,6 +63,13 @@ public class ClientController {
         response.put("message","Eliminación correcta");
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
+
+    @RequestMapping(
+            path = "/{clientId}",
+            method = RequestMethod.PUT,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
     public ResponseEntity updateClient(@PathVariable("clientId") Integer clientId,
                                        @RequestBody ClientDto clientDto) {
         // Verificamos que el fistName no sea nulo o no sea vacio.

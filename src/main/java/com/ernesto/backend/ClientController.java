@@ -39,7 +39,7 @@ public class ClientController {
             if(clientDto.getLastName()==null || clientDto.getLastName().trim().equals("")){
                 Map response = new HashMap();
                 response.put("code",1000);
-                response.put("Mmessage","El cliente no tiene apellidos");
+                response.put("Message","El cliente no tiene apellidos");
                 return new ResponseEntity<Map>(response,HttpStatus.BAD_REQUEST);
             }
             clientMapper.create(clientDto);

@@ -1,0 +1,43 @@
+
+
+###
+###Insertar nuevo cliente
+POST http://localhost:8008/api/v1/clients
+Content-Type: application/json
+Accept: application/json
+
+{
+	"firstName": "Jorge",
+	"lastName": "Pereyra",
+	"birthDate": "1997-09-05T05:25:43.364+0000",
+	"status":true
+}
+###Inserción incorrecta de un usuario
+
+POST http://localhost:8008/api/v1/clients
+Content-Type: application/json
+Accept: application/json
+
+{
+  "lastName": "Pereyra",
+  "birthDate": "1997-09-05T05:25:43.364+0000",
+  "status":true
+}
+### Listar clientes
+GET http://localhost:8008/api/v1/clients
+Content-Type: application/json
+Accept: application/json
+### Actualizar cliente
+PUT http://localhost:8008/api/v1/clients/5
+Content-Type: application/json
+Accept: application/json
+
+{
+ "firstName": "Sergio",
+  "lastName": "Iriarte"
+}
+###Eliminar cliente
+DELETE http://localhost:8008/api/v1/clients/3
+Content-Type: application/json
+Accept: application/json
+

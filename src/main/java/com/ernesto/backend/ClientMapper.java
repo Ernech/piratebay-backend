@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 public interface ClientMapper {
     //Insertar nuevo cliente
-    @Insert("INSERT INTO client (first_name,last_name,birth_date,status) VALUES (#{firstName},#{lastName},#{birthDate},true)")
+    @Insert("INSERT INTO client (first_name,last_name,birth_date,status) " +
+            "VALUES (#{firstName},#{lastName},#{birthDate},true)")
     void create(ClientDto clientDto);
     //Listar cliente
     @Select(" SELECT client_id as clientId, first_name as firstName, " +

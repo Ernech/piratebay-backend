@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.ernesto.backend.BackendApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.55 s - in com.ernesto.backend.BackendApplicationTests

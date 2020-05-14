@@ -1,0 +1,6 @@
+com\ernesto\backend\TestController.class
+com\ernesto\backend\ClientController.class
+com\ernesto\backend\ClientMapper.class
+com\ernesto\backend\AppConfiguration.class
+com\ernesto\backend\BackendApplication.class
+com\ernesto\backend\ClientDto.class

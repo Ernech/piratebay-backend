@@ -33,7 +33,7 @@ public class UserController {
     produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<UserModel>> findAllActives(@RequestHeader ("Authorization") String authorization){
         //Decodificando el token
-        String tokenJwt = authorization.substring(7);
+        String tokenJwt = authorization.git commit -m "first commit"(7);
         System.out.println("TOKEN JWT: "+   tokenJwt);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
         String idUsuario = decodedJWT.getSubject();

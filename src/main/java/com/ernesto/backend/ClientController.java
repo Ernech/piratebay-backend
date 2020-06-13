@@ -2,6 +2,7 @@ package com.ernesto.backend;
 
 import ch.qos.logback.core.net.server.Client;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,9 @@ import java.util.Map;
 public class ClientController {
 
     private ClientMapper clientMapper;
+
+    @Value("${server.port}")
+    private Integer port;
 
     @Autowired
     public ClientController(ClientMapper clientMapper){
@@ -49,6 +53,7 @@ public class ClientController {
 
     @RequestMapping(method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity listClient(){
+        System.out.println("*********** "+port);
         return new ResponseEntity<>(clientMapper.listAll(),HttpStatus.OK);
     }
 

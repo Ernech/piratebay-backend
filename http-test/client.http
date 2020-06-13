@@ -1,8 +1,6 @@
 
-
-###
 ###Insertar nuevo cliente
-POST http://localhost:8008/api/v1/clients
+POST http://piratebay.bo/api/v1/clients
 Content-Type: application/json
 Accept: application/json
 
@@ -24,7 +22,7 @@ Accept: application/json
   "status":true
 }
 ### Listar clientes
-GET http://localhost:8008/api/v1/clients
+GET http://piratebay.bo/api/v1/clients
 Content-Type: application/json
 Accept: application/json
 ### Actualizar cliente
@@ -34,8 +32,10 @@ Accept: application/json
 
 {
  "firstName": "Sergio",
-  "lastName": "Iriarte"
+  "lastName": "Iriarte",
+  "birthDate": "1997-08-05T05:25:43.364+0000"
 }
+
 ###Eliminar cliente
 DELETE http://localhost:8008/api/v1/clients/3
 Content-Type: application/json

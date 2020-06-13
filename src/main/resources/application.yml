@@ -9,3 +9,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/piratebay_db
     username: postgres
     password: 12345678_bbdd
+piratebay:
+  security:
+    salt: qwertyuiop
+    secretJwt: 1234567890

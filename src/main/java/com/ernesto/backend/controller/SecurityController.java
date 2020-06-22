@@ -51,7 +51,7 @@ public class SecurityController {
     @RequestMapping(value = "refresh",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE,
     consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String,Object>>authenticate(@RequestBody TokenRefreshModel tokenRefreshModel){
-        System.out.println("Token " + tokenRefreshModel.getRefreshModel());
+        System.out.println("Token refresh " + tokenRefreshModel.getRefreshModel());
         Map<String,String> tokens = securityBl.refresh(tokenRefreshModel);
         Map<String,String> response= new HashMap<>();
         response.put("Message","Authentication OK");

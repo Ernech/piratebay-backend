@@ -33,7 +33,7 @@ public class UserDao {
         }
         return userId;
     }
-    public ArrayList<UserModel> findAllActivies(){
+    public ArrayList<UserModel> findAllActives(){
         String query = "SELECT user_id, username, email, phone_number, cat_user_status FROM \"user\" WHERE status = 1";
         ArrayList<UserModel> result =null;
         try{

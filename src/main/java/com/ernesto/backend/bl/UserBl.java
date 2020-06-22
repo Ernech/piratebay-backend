@@ -17,7 +17,7 @@ public class UserBl {
     }
 
     public ArrayList<UserModel> findAllActives(){
-        return  this.userDao.findAllActivies();
+        return  this.userDao.findAllActives();
     }
 
 }

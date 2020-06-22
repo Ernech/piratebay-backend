@@ -57,7 +57,10 @@ UPDATE "user_role"
 SET status = 0
 WHERE user_role_id = 3;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6b0f4fad66d116a1a8f908b9a89400b321e48cbb
 INSERT INTO feature (feature_code, feature_name, status, tx_id, tx_username, tx_host, tx_date)
 VALUES ('PAGE_USER_MANAGEMENT', 'Gestión de usuarios', 1, 1, 'admin', 'localhost', now());
 
@@ -95,7 +98,7 @@ VALUES (2, 2, 1,  1, 'admin', 'localhost', now());
 INSERT INTO role_feature ( role_id, feature_id, status, tx_id, tx_username, tx_host, tx_date)
 VALUES (3, 2, 1,  1, 'admin', 'localhost', now());
 
--- CONFIGURACIÍN DE USUARIOS
+-- CONFIGURACIÓN DE USUARIOS
 
 INSERT INTO user_role ( user_id, role_id, status, tx_id, tx_username, tx_host, tx_date)
 VALUES (2, 2, 1,  1, 'admin', 'localhost', now());

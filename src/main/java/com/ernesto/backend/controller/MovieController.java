@@ -36,7 +36,7 @@ public class MovieController {
     public MovieController(MovieBl movieBl) { this.movieBl = movieBl; }
 
     @RequestMapping(
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             consumes =MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 

@@ -294,7 +294,7 @@ VALUES
    40, 40, 1, 1, 'root', '127.0.0.1', now()
 );
 
-SELECT prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)
+SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)
 FROM product prod JOIN product_order prod_or
 on prod.product_id = prod_or.product_id
 JOIN "order" ord on ord.order_id = prod_or.order_id

@@ -33,6 +33,7 @@ public class UserDao {
         }
         return userId;
     }
+
     public ArrayList<UserModel> findAllActives(){
         String query = "SELECT user_id, username, email, phone_number, cat_user_status FROM \"user\" WHERE status = 1";
         ArrayList<UserModel> result =null;
@@ -52,7 +53,6 @@ public class UserDao {
             throw new RuntimeException();
         }
         return result;
-
     }
 
     public ArrayList<String> findAllFeatureCodeByUserId(int userId){

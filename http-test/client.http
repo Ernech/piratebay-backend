@@ -41,3 +41,5 @@ DELETE http://localhost:8008/api/v1/clients/3
 Content-Type: application/json
 Accept: application/json
 
+###
+

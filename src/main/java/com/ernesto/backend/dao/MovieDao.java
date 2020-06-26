@@ -52,7 +52,7 @@ public class MovieDao {
                             resultSet.getInt(7));
                 }
             });
-
+            System.out.print(movies.get(0).getProductId());
         }catch (Exception e){
             System.out.print(e);
 //            throw new RuntimeException();

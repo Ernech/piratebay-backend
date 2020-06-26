@@ -74,7 +74,7 @@ public class MovieDao {
                         "AND prov.status = 1\n" +
                         "AND wrh.status = 1\n" +
                         "AND wrh.warehouse_name = ?\n" +
-                        "AND prod.product_name like '%'|| ? || '%'\n" +
+                        "AND UPPER(prod.product_name) like UPPER ('%'|| ? || '%')\n" +
                         "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name ;";
 
         ArrayList<MovieModel> movies = null;

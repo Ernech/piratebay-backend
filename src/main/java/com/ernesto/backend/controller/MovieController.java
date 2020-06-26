@@ -7,9 +7,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ernesto.backend.bl.MovieBl;
 import com.ernesto.backend.bl.SecurityBl;
 import com.ernesto.backend.bl.UserBl;
-import com.ernesto.backend.model.MovieModel;
-import com.ernesto.backend.model.UserModel;
-import com.ernesto.backend.model.WarehouseModel;
+import com.ernesto.backend.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
@@ -58,4 +56,26 @@ public class MovieController {
         return new ResponseEntity<>(this.movieBl.selectMoviesFromWarehouse(warehouseModel.getWarehouse()), HttpStatus.OK);
     }
 
+    @RequestMapping(
+            value = "search",
+            method = RequestMethod.GET,
+            consumes =MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ArrayList<MovieModel>> searchMoviesByParameter(@RequestHeader("Authorization") String authorization, @RequestBody SearchParameterModel searchParameterModel){
+        //Decodificando el token
+        String tokenJwt = authorization.substring(7);
+        System.out.println("TOKEN JWT: "+   tokenJwt);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
+        String idUsuario = decodedJWT.getSubject();
+        System.out.println("USER: "+idUsuario);
+        //Validando si el token es bueno y de autenticación
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
+            throw new RuntimeException("El token proporcionado no es un token de autenticación");
+        }
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm).withIssuer("PirateBay").build();
+        verifier.verify(tokenJwt);
+
+        return new ResponseEntity<>(this.movieBl.searchMoviesByParameter(searchParameterModel.getWarehouse(), searchParameterModel.getSearchParameter()), HttpStatus.OK);
+    }
 }

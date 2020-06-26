@@ -20,4 +20,10 @@ public class MovieBl {
     public ArrayList<MovieModel> selectMoviesFromWarehouse(String warehouse){
         return this.movieDao.selectMoviesFromWarehouse(warehouse);
     }
+
+    public ArrayList<MovieModel> searchMoviesByParameter(String warehouse, String searchParameter){
+        return this.movieDao.searchMoviesByParameter(warehouse, searchParameter);
+    }
+
+
 }

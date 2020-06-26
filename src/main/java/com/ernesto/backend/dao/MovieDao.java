@@ -74,7 +74,7 @@ public class MovieDao {
                         "AND prov.status = 1\n" +
                         "AND wrh.status = 1\n" +
                         "AND wrh.warehouse_name = ?\n" +
-                        "AND prod.product_name like '%'|| ? || '%'\n" +
+                        "AND UPPER(prod.product_name) like UPPER( '%'|| ? || '%')\n" +
                         "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name ;";
 
         ArrayList<MovieModel> movies = null;
@@ -103,7 +103,7 @@ public class MovieDao {
         //Implementamos SQL variable binding para evitar SQL injection
         String query = null;
         System.out.println(orderParameter);
-        if(orderParameter.equals("qtty_received")){
+        if("qtty_received".equals(orderParameter)){
             query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
                     "FROM product prod JOIN product_order prod_or\n" +
                     "on prod.product_id = prod_or.product_id\n" +

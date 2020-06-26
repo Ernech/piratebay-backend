@@ -35,7 +35,7 @@ public class MovieController {
     public MovieController(MovieBl movieBl) { this.movieBl = movieBl; }
 
     @RequestMapping(
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             consumes =MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
@@ -59,7 +59,7 @@ public class MovieController {
 
     @RequestMapping(
             value = "search",
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             consumes =MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<MovieModel>> searchMoviesByParameter(@RequestHeader("Authorization") String authorization, @RequestBody SearchParameterModel searchParameterModel){
@@ -82,7 +82,7 @@ public class MovieController {
 
     @RequestMapping(
             value = "order",
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<MovieModel>> orderMoviesByParameter(@RequestHeader("Authorization") String authorization, @RequestBody OrderParameterModel orderParameterModel){

@@ -14,7 +14,7 @@ public class MovieBl {
 
     @Autowired
     public MovieBl(MovieDao movieDao){
-        this.movieDao=movieDao;
+        this.movieDao = movieDao;
     }
 
     public ArrayList<MovieModel> selectMoviesFromWarehouse(String warehouse){
@@ -25,5 +25,8 @@ public class MovieBl {
         return this.movieDao.searchMoviesByParameter(warehouse, searchParameter);
     }
 
+    public ArrayList<MovieModel> orderMoviesByParameter(String warehouse, String orderParameter){
+        return this.movieDao.orderMoviesByParameter(warehouse, orderParameter);
+    }
 
 }

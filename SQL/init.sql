@@ -326,10 +326,10 @@ GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_na
 
 SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)
 FROM product prod JOIN product_order prod_or
-                       on prod.product_id = prod_or.product_id
-                  JOIN "order" ord on ord.order_id = prod_or.order_id
-                  JOIN provider prov on prov.provider_id = ord.provider_id
-                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
+on prod.product_id = prod_or.product_id
+JOIN "order" ord on ord.order_id = prod_or.order_id
+JOIN provider prov on prov.provider_id = ord.provider_id
+JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
 WHERE prod.status = 1
 AND prod_or.status = 1
 AND ord.status = 1
@@ -337,5 +337,5 @@ AND prov.status = 1
 AND wrh.status = 1
 AND wrh.warehouse_name = 'La Paz'
 GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name
-ORDER BY sum(prod_or.qtty_received) ASC
+ORDER BY SUM(prod_or.qtty_received);
 

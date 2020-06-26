@@ -6,9 +6,9 @@ spring:
     name: backend
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5433/piratebay_db
+    url: jdbc:postgresql://localhost:5432/piratebay_db
     username: postgres
-    password: postgres
+    password: 12345678_bbdd
 piratebay:
   security:
     salt: qwertyuiop

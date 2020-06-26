@@ -324,6 +324,7 @@ AND wrh.warehouse_name = 'La Paz'
 AND prod.product_name = 'Africa mía'
 GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name ;
 
+
 SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)
 FROM product prod JOIN product_order prod_or
 on prod.product_id = prod_or.product_id
@@ -337,5 +338,5 @@ AND prov.status = 1
 AND wrh.status = 1
 AND wrh.warehouse_name = 'La Paz'
 GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name
-ORDER BY SUM(prod_or.qtty_received);
+ORDER BY SUM(prod_or.qtty_received) ASC;
 

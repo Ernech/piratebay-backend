@@ -1,5 +1,5 @@
 GET http://localhost:8008/api/v1/movies
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMxMjY1MDZ9.-sL8uQFJ6YxiwaKZ4rr5YGqsQfu3AE296O50QKNMPgU
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMxMzE3NDB9.G1KvnG1EA3d-BnTXId7n5QFZpFhdDU2MzWBBeN--Ci4
 Content-Type: application/json
 Accept: application/json
 
@@ -9,15 +9,26 @@ Accept: application/json
 
 ###
 
-POST http://localhost:8008/api/v1/movies/search
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMxMzY5MDd9.WjVw9GSXW_XkL0wFkoW3z-N6V6YdlIPiDG7n_Fq04b0
+GET http://localhost:8008/api/v1/movies/search
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMxMzY4OTh9.YwQjc71E2Yl-fAUJ-HPsp5B9eEfwgI0Hj0pUSEBcFho
 Content-Type: application/json
 Accept: application/json
 
 {
   "warehouse": "La Paz",
-  "searchParameter": "frica"
+  "searchParameter": "lado"
 }
 
 ###
 
+GET http://localhost:8008/api/v1/movies/order
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMDM5MzV9.ppVOafRWhAsBa82MSllyFDRr-Mz80QZH8_vWI5HzDU0
+Content-Type: application/json
+Accept: application/json
+
+{
+  "warehouse": "La Paz",
+  "orderParameter": "qtty_received"
+}
+
+###

@@ -74,7 +74,7 @@ public class MovieDao {
                         "AND prov.status = 1\n" +
                         "AND wrh.status = 1\n" +
                         "AND wrh.warehouse_name = ?\n" +
-                        "AND UPPER(prod.product_name) like UPPER ('%'|| ? || '%')\n" +
+                        "AND prod.product_name like '%'|| ? || '%'\n" +
                         "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name ;";
 
         ArrayList<MovieModel> movies = null;
@@ -101,21 +101,40 @@ public class MovieDao {
 
     public ArrayList<MovieModel> orderMoviesByParameter (String warehouse, String orderParameter){
         //Implementamos SQL variable binding para evitar SQL injection
+        String query = null;
+        System.out.println(orderParameter);
+        if(orderParameter.equals("qtty_received")){
+            query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
+                    "FROM product prod JOIN product_order prod_or\n" +
+                    "on prod.product_id = prod_or.product_id\n" +
+                    "JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
+                    "JOIN provider prov on prov.provider_id = ord.provider_id\n" +
+                    "JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
+                    "WHERE prod.status = 1\n" +
+                    "AND prod_or.status = 1\n" +
+                    "AND ord.status = 1\n" +
+                    "AND prov.status = 1\n" +
+                    "AND wrh.status = 1\n" +
+                    "AND wrh.warehouse_name = ?\n" +
+                    "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name\n" +
+                    "ORDER BY SUM("+orderParameter+") ASC; ";
+        } else {
+            query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
+                    "FROM product prod JOIN product_order prod_or\n" +
+                    "on prod.product_id = prod_or.product_id\n" +
+                    "JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
+                    "JOIN provider prov on prov.provider_id = ord.provider_id\n" +
+                    "JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
+                    "WHERE prod.status = 1\n" +
+                    "AND prod_or.status = 1\n" +
+                    "AND ord.status = 1\n" +
+                    "AND prov.status = 1\n" +
+                    "AND wrh.status = 1\n" +
+                    "AND wrh.warehouse_name = ?\n" +
+                    "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name\n" +
+                    "ORDER BY "+orderParameter+" ASC; ";
+        }
 
-        String query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
-                        "FROM product prod JOIN product_order prod_or\n" +
-                        "on prod.product_id = prod_or.product_id\n" +
-                        "JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
-                        "JOIN provider prov on prov.provider_id = ord.provider_id\n" +
-                        "JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
-                        "WHERE prod.status = 1\n" +
-                        "AND prod_or.status = 1\n" +
-                        "AND ord.status = 1\n" +
-                        "AND prov.status = 1\n" +
-                        "AND wrh.status = 1\n" +
-                        "AND wrh.warehouse_name = ?\n" +
-                        "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name\n" +
-                        "ORDER BY "+orderParameter+" ASC; ";
         ArrayList<MovieModel> movies = null;
         try{
             movies = (ArrayList<MovieModel>) jdbcTemplate.query(query, new Object[]{warehouse}, new RowMapper<MovieModel>(){

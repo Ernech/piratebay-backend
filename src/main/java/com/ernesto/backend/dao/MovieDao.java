@@ -1,5 +1,7 @@
 package com.ernesto.backend.dao;
 
+import com.ernesto.backend.model.KardexInformationModel;
+import com.ernesto.backend.model.KardexModel;
 import com.ernesto.backend.model.MovieModel;
 import com.ernesto.backend.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,15 +54,13 @@ public class MovieDao {
                             resultSet.getInt(7));
                 }
             });
-            System.out.print(movies.get(0).getProductId());
         }catch (Exception e){
-            System.out.print(e);
-//            throw new RuntimeException();
+            throw new RuntimeException();
         }
         return movies;
     }
 
-    public ArrayList<MovieModel> searchMoviesByParameter (String warehouse, String searchParameter){
+    public ArrayList<MovieModel> searchMoviesByParameter (String warehouse, String parameter){
         //Implementamos SQL variable binding para evitar SQL injection
         String query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
                         "FROM product prod JOIN product_order prod_or\n" +
@@ -74,12 +74,12 @@ public class MovieDao {
                         "AND prov.status = 1\n" +
                         "AND wrh.status = 1\n" +
                         "AND wrh.warehouse_name = ?\n" +
-                        "AND UPPER(prod.product_name) like UPPER( '%'|| ? || '%')\n" +
+                        "AND UPPER(prod.product_name) like UPPER('%'|| ? || '%')\n" +
                         "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name ;";
 
         ArrayList<MovieModel> movies = null;
         try{
-            movies = (ArrayList<MovieModel>) jdbcTemplate.query(query, new Object[]{warehouse, searchParameter}, new RowMapper<MovieModel>(){
+            movies = (ArrayList<MovieModel>) jdbcTemplate.query(query, new Object[]{warehouse, parameter}, new RowMapper<MovieModel>(){
                 @Override
                 public MovieModel mapRow(ResultSet resultSet, int i) throws SQLException {
                     return new MovieModel(resultSet.getInt(1),
@@ -93,17 +93,16 @@ public class MovieDao {
             });
 
         }catch (Exception e){
-            System.out.print(e);
-//            throw new RuntimeException();
+            throw new RuntimeException();
         }
         return movies;
     }
 
-    public ArrayList<MovieModel> orderMoviesByParameter (String warehouse, String orderParameter){
+    public ArrayList<MovieModel> orderMoviesByParameter (String warehouse, String parameter){
         //Implementamos SQL variable binding para evitar SQL injection
         String query = null;
-        System.out.println(orderParameter);
-        if("qtty_received".equals(orderParameter)){
+        System.out.println(parameter);
+        if("qtty_received".equals(parameter)){
             query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
                     "FROM product prod JOIN product_order prod_or\n" +
                     "on prod.product_id = prod_or.product_id\n" +
@@ -117,7 +116,7 @@ public class MovieDao {
                     "AND wrh.status = 1\n" +
                     "AND wrh.warehouse_name = ?\n" +
                     "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name\n" +
-                    "ORDER BY SUM("+orderParameter+") ASC; ";
+                    "ORDER BY SUM("+parameter+") ASC; ";
         } else {
             query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
                     "FROM product prod JOIN product_order prod_or\n" +
@@ -132,7 +131,7 @@ public class MovieDao {
                     "AND wrh.status = 1\n" +
                     "AND wrh.warehouse_name = ?\n" +
                     "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name\n" +
-                    "ORDER BY "+orderParameter+" ASC; ";
+                    "ORDER BY "+parameter+" ASC; ";
         }
 
         ArrayList<MovieModel> movies = null;
@@ -151,8 +150,7 @@ public class MovieDao {
             });
 
         }catch (Exception e){
-            System.out.print(e);
-//            throw new RuntimeException();
+            throw new RuntimeException();
         }
         return movies;
     }

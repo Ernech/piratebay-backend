@@ -1,0 +1,36 @@
+## Lista de películas de determinado almacén
+
+GET http://localhost:8008/api/v1/movies
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMjI1OTF9.9bxmGNHnHzxXUQ19yGmj2kuBY6ohntoh5wopTJl-WSc
+Content-Type: application/json
+Accept: application/json
+
+{
+  "warehouse": "La Paz"
+}
+
+### Buscando
+
+GET http://localhost:8008/api/v1/movies/search
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMjI3Njl9._DO3sScYz1WuEZbY0EPtaQjeLymhMkuq02qCrNPKzXw
+Content-Type: application/json
+Accept: application/json
+
+{
+  "warehouse": "La Paz",
+  "parameter": "lado"
+}
+
+###
+
+GET http://localhost:8008/api/v1/movies/sort
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMjI3OTZ9.8SV2zwQzQV_s__BrsKQ2kcFh1T5sb8OcCG1zBs8BjAU
+Content-Type: application/json
+Accept: application/json
+
+{
+  "warehouse": "La Paz",
+  "parameter": "qtty_received"
+}
+
+###

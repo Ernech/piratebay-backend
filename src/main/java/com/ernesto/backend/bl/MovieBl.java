@@ -1,6 +1,7 @@
 package com.ernesto.backend.bl;
 
 import com.ernesto.backend.dao.MovieDao;
+import com.ernesto.backend.model.KardexInformationModel;
 import com.ernesto.backend.model.MovieModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,11 @@ public class MovieBl {
         return this.movieDao.selectMoviesFromWarehouse(warehouse);
     }
 
-    public ArrayList<MovieModel> searchMoviesByParameter(String warehouse, String searchParameter){
-        return this.movieDao.searchMoviesByParameter(warehouse, searchParameter);
+    public ArrayList<MovieModel> searchMoviesByParameter(String warehouse, String parameter){
+        return this.movieDao.searchMoviesByParameter(warehouse, parameter);
     }
 
-    public ArrayList<MovieModel> orderMoviesByParameter(String warehouse, String orderParameter){
-        return this.movieDao.orderMoviesByParameter(warehouse, orderParameter);
+    public ArrayList<MovieModel> orderMoviesByParameter(String warehouse, String parameter){
+        return this.movieDao.orderMoviesByParameter(warehouse, parameter);
     }
-
 }

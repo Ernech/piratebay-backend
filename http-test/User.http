@@ -1,34 +1,9 @@
-GET http://localhost:8008/api/v1/movies
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMDU4OTZ9.g8_zOcjsQQhQVmZ9--2Rf_9S3UJBP6EsJ0Idc2kWCPI
+GET http://localhost:8008/api/v1/user
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMjI1OTF9.9bxmGNHnHzxXUQ19yGmj2kuBY6ohntoh5wopTJl-WSc
 Content-Type: application/json
 Accept: application/json
 
 {
-  "warehouse": "La Paz"
+
 }
 
-###
-
-GET http://localhost:8008/api/v1/movies/search
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMDU3MTl9.C8N0UPf3tKQm7SUwEX4l1Ryowzit1uzqPOvkpUTVZxg
-Content-Type: application/json
-Accept: application/json
-
-{
-  "warehouse": "La Paz",
-  "searchParameter": "lado"
-}
-
-###
-
-GET http://localhost:8008/api/v1/movies/order
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMDU2ODR9.PxwnPJqf7ASrvhV_XUzYFGwNDS5jkUeZP9Fbc9yDC58
-Content-Type: application/json
-Accept: application/json
-
-{
-  "warehouse": "La Paz",
-  "orderParameter": "qtty_received"
-}
-
-###

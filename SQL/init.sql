@@ -372,8 +372,8 @@ AND prod_or.status = 1
 AND ord.status = 1
 AND prov.status = 1
 AND wrh.status = 1
-AND prod.product_name = 'A la hora señalada'
 AND wrh.warehouse_name = 'La Paz'
+AND prod.product_name = 'Africa mía'
 GROUP BY ord.date_received, ord.concept, ord.receipt, prod_or.unit_price, prod_or.qtty_received
 ORDER BY ord.date_received;
 
@@ -386,3 +386,4 @@ UPDATE "order" SET concept = 'Compra' WHERE order_id = 3;
 UPDATE "order" SET receipt = 'F-1' WHERE order_id = 1;
 UPDATE "order" SET receipt = 'F-2' WHERE order_id = 2;
 UPDATE "order" SET receipt = 'F-3' WHERE order_id = 3;
+

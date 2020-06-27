@@ -1,0 +1,25 @@
+##
+
+GET http://localhost:8008/api/v1/kardex/information
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMjYzNDR9.Eg930i41yzhgJzXMGU8UJiFbF4IC5zh7C-dNOjc5xo8
+Content-Type: application/json
+Accept: application/json
+
+{
+  "warehouse": "La Paz",
+  "parameter": "Africa mía"
+}
+
+###
+
+GET http://localhost:8008/api/v1/kardex
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMjgyODJ9.RKiBn4jNYb4jZGxVGKEpHNuc8o3vg1C9fup9--9clFk
+Content-Type: application/json
+Accept: application/json
+
+{
+  "warehouse": "La Paz",
+  "parameter": "A la hora señalada"
+}
+
+###

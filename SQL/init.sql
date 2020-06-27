@@ -344,17 +344,17 @@ ORDER BY SUM(prod_or.qtty_received) ASC;
 -- Query para obtener la información general del kardex
 SELECT prod.product_code, prod.product_name, prod.format, wrh.warehouse_address, prov.provider_name
 FROM product prod JOIN product_order prod_or
-on prod.product_id = prod_or.product_id
-JOIN "order" ord on ord.order_id = prod_or.order_id
-JOIN provider prov on prov.provider_id = ord.provider_id
-JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
+                       on prod.product_id = prod_or.product_id
+                  JOIN "order" ord on ord.order_id = prod_or.order_id
+                  JOIN provider prov on prov.provider_id = ord.provider_id
+                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
 WHERE prod.status = 1
-AND prod_or.status = 1
-AND ord.status = 1
-AND prov.status = 1
-AND wrh.status = 1
-AND prod.product_name = 'Africa mía'
-AND wrh.warehouse_name = 'La Paz'
+  AND prod_or.status = 1
+  AND ord.status = 1
+  AND prov.status = 1
+  AND wrh.status = 1
+  AND prod.product_name = 'Africa mía'
+  AND wrh.warehouse_name = 'La Paz'
 GROUP BY prod.product_code, prod.product_name, prod.format, wrh.warehouse_address, prov.provider_name;
 
 -- Query para obtener el kardex
@@ -363,17 +363,17 @@ SELECT ord.date_received, ord.concept, ord.receipt, prod_or.unit_price as ValorU
        SUM(prod_or.qtty_received) over (order by ord.date_received) as SaldoCantidad,
        SUM(prod_or.unit_price*prod_or.qtty_received) over (order by ord.date_received) as SaldoValor
 FROM product prod JOIN product_order prod_or
-on prod.product_id = prod_or.product_id
-JOIN "order" ord on ord.order_id = prod_or.order_id
-JOIN provider prov on prov.provider_id = ord.provider_id
-JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
+                       on prod.product_id = prod_or.product_id
+                  JOIN "order" ord on ord.order_id = prod_or.order_id
+                  JOIN provider prov on prov.provider_id = ord.provider_id
+                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
 WHERE prod.status = 1
-AND prod_or.status = 1
-AND ord.status = 1
-AND prov.status = 1
-AND wrh.status = 1
-AND wrh.warehouse_name = 'La Paz'
-AND prod.product_name = 'Africa mía'
+  AND prod_or.status = 1
+  AND ord.status = 1
+  AND prov.status = 1
+  AND wrh.status = 1
+  AND wrh.warehouse_name = 'La Paz'
+  AND prod.product_name = 'Africa mía'
 GROUP BY ord.date_received, ord.concept, ord.receipt, prod_or.unit_price, prod_or.qtty_received
 ORDER BY ord.date_received;
 
@@ -387,3 +387,111 @@ UPDATE "order" SET receipt = 'F-1' WHERE order_id = 1;
 UPDATE "order" SET receipt = 'F-2' WHERE order_id = 2;
 UPDATE "order" SET receipt = 'F-3' WHERE order_id = 3;
 
+-- Agregando órdenes para el kardex
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, concept)
+VALUES
+(  nextval('order_order_id_seq'), 1, 1, 2, '2020-06-15 15:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-4', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, concept)
+VALUES
+(  nextval('order_order_id_seq'), 2, 1, 2, '2020-06-18 10:20:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-5', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, concept)
+VALUES
+(  nextval('order_order_id_seq'), 2, 1, 2, '2020-06-21 12:35:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-6', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, concept)
+VALUES
+(  nextval('order_order_id_seq'), 1, 1, 2, '2020-06-23 13:20:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-7', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, concept)
+VALUES
+(  nextval('order_order_id_seq'), 1, 1, 2, '2020-06-26 10:00:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-8', 'Compra'
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 4, 1, 8, 70,
+   70, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 5, 2, 8, 50,
+   45, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 6, 3, 8, 30,
+   30, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 7, 4, 10, 30,
+   20, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 8, 1, 10, 60,
+   55, 1, 1, 'root', '127.0.0.1', now()
+);
+
+
+-- Query para obtener las órdenes no recibidas
+
+SELECT ord.order_id, prov.provider_name, ord.date_requested, ord.receipt,
+       ord.concept, prod.product_id, prod.product_name, prod_or.unit_price,
+       prod_or.qtty_requested, prod_or.qtty_commit
+FROM product prod JOIN product_order prod_or
+                       on prod.product_id = prod_or.product_id
+                  JOIN "order" ord on ord.order_id = prod_or.order_id
+                  JOIN provider prov on prov.provider_id = ord.provider_id
+                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
+                  JOIN "user" usr on usr.user_id = ord.order_user_id
+WHERE prod.status = 1
+  AND prod_or.status = 1
+  AND ord.status = 1
+  AND prov.status = 1
+  AND wrh.status = 1
+  AND ord.date_received is Null
+  AND prod_or.qtty_received is Null
+GROUP BY ord.order_id, prov.provider_name, ord.date_requested, ord.receipt, ord.concept,
+         prod_or.provider_product_id, prod.product_id, prod.product_name, prod_or.unit_price,
+         prod_or.qtty_requested, prod_or.qtty_commit;
+
+
+UPDATE "order" SET date_received = '2020-06-20 15:30:00.000000' where order_id = 5;
+UPDATE product_order SET qtty_received = 45 where order_id = 5;

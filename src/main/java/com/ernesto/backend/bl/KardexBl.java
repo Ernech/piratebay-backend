@@ -4,6 +4,7 @@ import com.ernesto.backend.dao.KardexDao;
 import com.ernesto.backend.dao.MovieDao;
 import com.ernesto.backend.model.KardexInformationModel;
 import com.ernesto.backend.model.KardexModel;
+import com.ernesto.backend.model.OrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,4 +27,9 @@ public class KardexBl {
     public ArrayList<KardexModel> returnKardexModelByMovie (String warehouse, String parameter){
         return this.kardexDao.returnKardexModelByMovie(warehouse, parameter);
     }
+
+    public ArrayList<OrderModel> returnNotReceivedOrders (){
+        return this.kardexDao.returnNotReceivedOrders();
+    }
 }
+

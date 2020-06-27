@@ -473,7 +473,7 @@ VALUES
 -- Query para obtener las órdenes no recibidas
 
 SELECT ord.order_id, prov.provider_name, ord.date_requested, ord.receipt,
-       ord.concept, prod.product_id, prod.product_name, prod_or.unit_price,
+       ord.concept, prod_or.provider_product_id, prod.product_id, prod.product_name, prod_or.unit_price,
        prod_or.qtty_requested, prod_or.qtty_commit
 FROM product prod JOIN product_order prod_or
                        on prod.product_id = prod_or.product_id
@@ -491,9 +491,8 @@ WHERE prod.status = 1
   AND wrh.warehouse_name = 'La Paz'
   AND prod.product_name = 'A la hora señalada'
 GROUP BY ord.order_id, prov.provider_name, ord.date_requested, ord.receipt, ord.concept,
-         prod_or.provider_product_id, prod.product_id, prod.product_name, prod_or.unit_price,
-         prod_or.qtty_requested, prod_or.qtty_commit;
+         prod_or.provider_product_id, prod_or.provider_product_id, prod.product_id,
+         prod.product_name, prod_or.unit_price, prod_or.qtty_requested, prod_or.qtty_commit;
 
-
-UPDATE "order" SET date_received = '2020-06-20 15:30:00.000000' where order_id = 5;
-UPDATE product_order SET qtty_received = 45 where order_id = 5;
+UPDATE "order" SET date_received = '2020-06-25 15:30:00.000000' where order_id = 6;
+UPDATE product_order SET qtty_received = 30 where provider_product_id = 8;

@@ -9,6 +9,7 @@ public class OrderModel {
     private Date dateRequested;
     private String receipt;
     private String concept;
+    private Integer providerProductId;
     private Integer productId;
     private String productName;
     private Double unitPrice;
@@ -18,12 +19,13 @@ public class OrderModel {
     public OrderModel() {
     }
 
-    public OrderModel(Integer orderId, String providerName, Date dateRequested, String receipt, String concept, Integer productId, String productName, Double unitPrice, Integer qttyRequested, Integer qttyCommit) {
+    public OrderModel(Integer orderId, String providerName, Date dateRequested, String receipt, String concept, Integer providerProductId, Integer productId, String productName, Double unitPrice, Integer qttyRequested, Integer qttyCommit) {
         this.orderId = orderId;
         this.providerName = providerName;
         this.dateRequested = dateRequested;
         this.receipt = receipt;
         this.concept = concept;
+        this.providerProductId = providerProductId;
         this.productId = productId;
         this.productName = productName;
         this.unitPrice = unitPrice;
@@ -69,6 +71,14 @@ public class OrderModel {
 
     public void setConcept(String concept) {
         this.concept = concept;
+    }
+
+    public Integer getProviderProductId() {
+        return providerProductId;
+    }
+
+    public void setProviderProductId(Integer providerProductId) {
+        this.providerProductId = providerProductId;
     }
 
     public Integer getProductId() {
@@ -119,6 +129,7 @@ public class OrderModel {
                 ", dateRequested=" + dateRequested +
                 ", receipt='" + receipt + '\'' +
                 ", concept='" + concept + '\'' +
+                ", providerProductId=" + providerProductId +
                 ", productId=" + productId +
                 ", productName='" + productName + '\'' +
                 ", unitPrice=" + unitPrice +

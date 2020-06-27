@@ -96,27 +96,4 @@ public class KardexController {
         verifier.verify(tokenJwt);
         return new ResponseEntity<>(this.kardexBl.returnNotReceivedOrders(parameterModel.getWarehouse(), parameterModel.getParameter()), HttpStatus.OK);
     }
-
-    @RequestMapping(
-            value = "orders",
-            method = RequestMethod.GET,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-
-    public ResponseEntity<ArrayList<OrderModel>> returnOrdersByMovie (@RequestHeader("Authorization") String authorization, @RequestBody ParameterModel parameterModel){
-        //Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        System.out.println("TOKEN JWT: "+   tokenJwt);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        String idUsuario = decodedJWT.getSubject();
-        System.out.println("USER: "+idUsuario);
-        //Validando si el token es bueno y de autenticación
-        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("PirateBay").build();
-        verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.kardexBl.returnNotReceivedOrders(parameterModel.getWarehouse(), parameterModel.getParameter()), HttpStatus.OK);
-    }
 }

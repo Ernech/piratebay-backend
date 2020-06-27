@@ -104,7 +104,7 @@ public class KardexDao {
         return kardex;
     }
 
-    public ArrayList<OrderModel> returnNotReceivedOrders () {
+    public ArrayList<OrderModel> returnOrdersByMovie (String warehouse, String parameter) {
         //Implementamos SQL variable binding para evitar SQL injection
         String query = "SELECT ord.order_id, prov.provider_name, ord.date_requested, ord.receipt,\n" +
                         "       ord.concept, prod.product_id, prod.product_name, prod_or.unit_price,\n" +
@@ -122,13 +122,16 @@ public class KardexDao {
                         "  AND wrh.status = 1\n" +
                         "  AND ord.date_received is Null\n" +
                         "  AND prod_or.qtty_received is Null\n" +
+                        "  AND wrh.warehouse_name = ? \n" +
+                        "  AND prod.product_name = ? \n" +
                         "GROUP BY ord.order_id, prov.provider_name, ord.date_requested, ord.receipt, ord.concept,\n" +
                         "         prod_or.provider_product_id, prod.product_id, prod.product_name, prod_or.unit_price,\n" +
                         "         prod_or.qtty_requested, prod_or.qtty_commit;";
 
         ArrayList<OrderModel> orders = null;
         try {
-            orders = (ArrayList<OrderModel>) jdbcTemplate.query(query, new RowMapper<OrderModel>() {
+            orders = (ArrayList<OrderModel>) jdbcTemplate.query(query, new Object[]{warehouse, parameter},
+                    new RowMapper<OrderModel>() {
                 @Override
                 public OrderModel mapRow(ResultSet resultSet, int i) throws SQLException {
                     return new OrderModel(resultSet.getInt(1),
@@ -143,6 +146,55 @@ public class KardexDao {
                             resultSet.getInt(10));
                 }
             });
+
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return orders;
+    }
+
+    public ArrayList<OrderModel> setQttyReceivedByOrder (String warehouse, String parameter) {
+        //Implementamos SQL variable binding para evitar SQL injection
+        String query = "SELECT ord.order_id, prov.provider_name, ord.date_requested, ord.receipt,\n" +
+                "       ord.concept, prod.product_id, prod.product_name, prod_or.unit_price,\n" +
+                "       prod_or.qtty_requested, prod_or.qtty_commit\n" +
+                "FROM product prod JOIN product_order prod_or\n" +
+                "                       on prod.product_id = prod_or.product_id\n" +
+                "                  JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
+                "                  JOIN provider prov on prov.provider_id = ord.provider_id\n" +
+                "                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
+                "                  JOIN \"user\" usr on usr.user_id = ord.order_user_id\n" +
+                "WHERE prod.status = 1\n" +
+                "  AND prod_or.status = 1\n" +
+                "  AND ord.status = 1\n" +
+                "  AND prov.status = 1\n" +
+                "  AND wrh.status = 1\n" +
+                "  AND ord.date_received is Null\n" +
+                "  AND prod_or.qtty_received is Null\n" +
+                "  AND wrh.warehouse_name = ? \n" +
+                "  AND prod.product_name = ? \n" +
+                "GROUP BY ord.order_id, prov.provider_name, ord.date_requested, ord.receipt, ord.concept,\n" +
+                "         prod_or.provider_product_id, prod.product_id, prod.product_name, prod_or.unit_price,\n" +
+                "         prod_or.qtty_requested, prod_or.qtty_commit;";
+
+        ArrayList<OrderModel> orders = null;
+        try {
+            orders = (ArrayList<OrderModel>) jdbcTemplate.query(query, new Object[]{warehouse, parameter},
+                    new RowMapper<OrderModel>() {
+                        @Override
+                        public OrderModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new OrderModel(resultSet.getInt(1),
+                                    resultSet.getString(2),
+                                    resultSet.getDate(3),
+                                    resultSet.getString(4),
+                                    resultSet.getString(5),
+                                    resultSet.getInt(6),
+                                    resultSet.getString(7),
+                                    resultSet.getDouble(8),
+                                    resultSet.getInt(9),
+                                    resultSet.getInt(10));
+                        }
+                    });
 
         } catch (Exception e) {
             throw new RuntimeException();

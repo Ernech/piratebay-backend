@@ -488,6 +488,8 @@ WHERE prod.status = 1
   AND wrh.status = 1
   AND ord.date_received is Null
   AND prod_or.qtty_received is Null
+  AND wrh.warehouse_name = 'La Paz'
+  AND prod.product_name = 'A la hora señalada'
 GROUP BY ord.order_id, prov.provider_name, ord.date_requested, ord.receipt, ord.concept,
          prod_or.provider_product_id, prod.product_id, prod.product_name, prod_or.unit_price,
          prod_or.qtty_requested, prod_or.qtty_commit;

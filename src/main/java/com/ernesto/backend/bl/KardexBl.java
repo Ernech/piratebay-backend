@@ -28,8 +28,8 @@ public class KardexBl {
         return this.kardexDao.returnKardexModelByMovie(warehouse, parameter);
     }
 
-    public ArrayList<OrderModel> returnNotReceivedOrders (){
-        return this.kardexDao.returnNotReceivedOrders();
+    public ArrayList<OrderModel> returnNotReceivedOrders (String warehouse, String parameter){
+        return this.kardexDao.returnOrdersByMovie(warehouse, parameter);
     }
 }
 

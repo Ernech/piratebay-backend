@@ -25,12 +25,14 @@ Accept: application/json
 ###
 
 GET http://localhost:8008/api/v1/kardex/orders
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyNzM4NjB9.VbcPx0IBNgqPKZkbmhWS986nDG5du1Gkd1cThXZcoaU
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyODIwODZ9.iyr4N05i2nfaDF0siBA8WiORo09d4kXftX6Luu9YNu4
 Content-Type: application/json
 Accept: application/json
 
 {
-
+  "warehouse": "La Paz",
+  "parameter": "A la hora señalada"
 }
 
 ###
+

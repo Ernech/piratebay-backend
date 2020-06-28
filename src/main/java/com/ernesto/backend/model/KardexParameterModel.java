@@ -8,16 +8,16 @@ public class KardexParameterModel {
     public KardexParameterModel() {
     }
 
-    public KardexParameterModel(int warehouseId, Integer parameter) {
+    public KardexParameterModel(Integer warehouseId, Integer parameter) {
         this.warehouseId = warehouseId;
         this.parameter = parameter;
     }
 
-    public Integer getWarehouse() {
+    public Integer getWarehouseId() {
         return warehouseId;
     }
 
-    public void setWarehouse(Integer warehouseId) {
+    public void setWarehouseId(Integer warehouseId) {
         this.warehouseId = warehouseId;
     }
 

@@ -58,7 +58,7 @@ public class KardexDao {
         return information;
     }
 
-    public ArrayList<KardexModel> returnKardexModelByMovie (String warehouse, int parameter) {
+    public ArrayList<KardexModel> returnKardexModelByMovie (int warehouseId, int parameter) {
         //Implementamos SQL variable binding para evitar SQL injection
         String query = "SELECT ord.date_received, ord.concept, ord.receipt, prod_or.unit_price as ValorUnitario,\n" +
                         "       prod_or.qtty_received as EntradaCantidad, prod_or.unit_price*prod_or.qtty_received as EntradaValor,\n" +
@@ -74,14 +74,14 @@ public class KardexDao {
                         "  AND ord.status = 1\n" +
                         "  AND prov.status = 1\n" +
                         "  AND wrh.status = 1\n" +
-                        "  AND wrh.warehouse_name = ? \n" +
+                        "  AND wrh.warehouse_id = ? \n" +
                         "  AND prod.product_id = ? \n" +
                         "GROUP BY ord.date_received, ord.concept, ord.receipt, prod_or.unit_price, prod_or.qtty_received\n" +
                         "ORDER BY ord.date_received;";
 
         ArrayList<KardexModel> kardex = null;
         try {
-            kardex = (ArrayList<KardexModel>) jdbcTemplate.query(query, new Object[]{warehouse, parameter}, new RowMapper<KardexModel>() {
+            kardex = (ArrayList<KardexModel>) jdbcTemplate.query(query, new Object[]{warehouseId, parameter}, new RowMapper<KardexModel>() {
                 @Override
                 public KardexModel mapRow(ResultSet resultSet, int i) throws SQLException {
                     return new KardexModel(resultSet.getDate(1),
@@ -96,6 +96,7 @@ public class KardexDao {
             });
 
         } catch (Exception e) {
+            System.out.println("error: "+e);
             throw new RuntimeException();
         }
         return kardex;

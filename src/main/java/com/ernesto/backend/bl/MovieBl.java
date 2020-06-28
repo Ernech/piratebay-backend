@@ -22,8 +22,8 @@ public class MovieBl {
         return this.movieDao.selectMoviesFromWarehouse(warehouseId);
     }
 
-    public ArrayList<MovieModel> searchMoviesByParameter(String warehouse, String parameter){
-        return this.movieDao.searchMoviesByParameter(warehouse, parameter);
+    public ArrayList<MovieModel> searchMoviesByParameter(Integer warehouseId, String searchParameter, String orderParameter){
+        return this.movieDao.searchMoviesByParameter(warehouseId, searchParameter, orderParameter);
     }
 
     public ArrayList<MovieModel> orderMoviesByParameter(String warehouse, String parameter){

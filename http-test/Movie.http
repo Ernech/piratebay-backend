@@ -1,12 +1,12 @@
 ## Lista de películas de determinado almacén
 
-GET http://localhost:8008/api/v1/movies
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMjI1OTF9.9bxmGNHnHzxXUQ19yGmj2kuBY6ohntoh5wopTJl-WSc
+POST http://localhost:8008/api/v1/movies
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNTkwMzl9.N4LuyAwkvbjqC9-nIBH2FQVkzm_6O2oSWGUoy_IU7r0
 Content-Type: application/json
 Accept: application/json
 
 {
-  "warehouse": "La Paz"
+  "warehouseId": 1
 }
 
 ### Buscando

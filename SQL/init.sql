@@ -264,13 +264,12 @@ VALUES
    40, 40, 1, 1, 'root', '127.0.0.1', now()
 );
 
--- Query para devolver todos los almacenes
 
+-- Query para devolver todos los almacenes
 SELECT wrh.warehouse_id, wrh.warehouse_name
 FROM warehouse wrh
   WHERE wrh.status = 1
 GROUP BY wrh.warehouse_id, wrh.warehouse_name;
-
 
 -- Query para la lista de películas de un almacén
 SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)
@@ -287,21 +286,23 @@ WHERE prod.status = 1
   AND wrh.warehouse_id = '1'
 GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name ;
 
+
 -- Query para buscar una película por su nombre
 SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)
 FROM product prod JOIN product_order prod_or
-on prod.product_id = prod_or.product_id
-JOIN "order" ord on ord.order_id = prod_or.order_id
-JOIN provider prov on prov.provider_id = ord.provider_id
-JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
+                       on prod.product_id = prod_or.product_id
+                  JOIN "order" ord on ord.order_id = prod_or.order_id
+                  JOIN provider prov on prov.provider_id = ord.provider_id
+                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
 WHERE prod.status = 1
-AND prod_or.status = 1
-AND ord.status = 1
-AND prov.status = 1
-AND wrh.status = 1
-AND wrh.warehouse_name = 'La Paz'
-AND prod.product_name = 'Africa mía'
-GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name ;
+  AND prod_or.status = 1
+  AND ord.status = 1
+  AND prov.status = 1
+  AND wrh.status = 1
+  AND wrh.warehouse_id = '1'
+  AND prod.product_name like '%mía%'
+GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name
+ORDER BY product_code;
 
 -- Query para ordenar la lista de películas con un parámetro
 SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)
@@ -396,5 +397,5 @@ GROUP BY ord.order_id, prov.provider_name, ord.date_requested, ord.receipt, ord.
          prod_or.provider_product_id, prod_or.provider_product_id, prod.product_id,
          prod.product_name, prod_or.unit_price, prod_or.qtty_requested, prod_or.qtty_commit;
 
-UPDATE "order" SET date_received = '2020-06-25 15:30:00.000000' where order_id = 6;
-UPDATE product_order SET qtty_received = 30 where provider_product_id = 8;
+UPDATE "order" SET date_received =null where order_id = 6;
+UPDATE product_order SET qtty_received = null where provider_product_id = 8;

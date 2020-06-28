@@ -35,17 +35,15 @@ public class MovieController {
     public MovieController(MovieBl movieBl) { this.movieBl = movieBl; }
 
     @RequestMapping(
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             consumes =MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
     public ResponseEntity<ArrayList<MovieModel>> selectMoviesFromWarehouse(@RequestHeader("Authorization") String authorization, @RequestBody WarehouseModel warehouseModel){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
-        System.out.println("TOKEN JWT: "+   tokenJwt);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
         String idUsuario = decodedJWT.getSubject();
-        System.out.println("USER: "+idUsuario);
         //Validando si el token es bueno y de autenticación
         if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
             throw new RuntimeException("El token proporcionado no es un token de autenticación");
@@ -62,13 +60,11 @@ public class MovieController {
             consumes =MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<ArrayList<MovieModel>> searchMoviesByParameter(@RequestHeader("Authorization") String authorization, @RequestBody ParameterModel parameterModel){
+    public ResponseEntity<ArrayList<MovieModel>> searchMoviesByParameter(@RequestHeader("Authorization") String authorization, @RequestBody SearchParameterModel searchParameterModel){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
-        System.out.println("TOKEN JWT: "+   tokenJwt);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
         String idUsuario = decodedJWT.getSubject();
-        System.out.println("USER: "+idUsuario);
         //Validando si el token es bueno y de autenticación
         if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
             throw new RuntimeException("El token proporcionado no es un token de autenticación");
@@ -76,7 +72,7 @@ public class MovieController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("PirateBay").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.movieBl.searchMoviesByParameter(parameterModel.getWarehouse(), parameterModel.getParameter()), HttpStatus.OK);
+        return new ResponseEntity<>(this.movieBl.searchMoviesByParameter(searchParameterModel.getWarehouseId(), searchParameterModel.getSearchParameter(), searchParameterModel.getOrderParameter()), HttpStatus.OK);
     }
 
     @RequestMapping(

@@ -31,17 +31,14 @@ public class WarehouseController {
     public WarehouseController(WarehouseBI warehouseBI) { this.warehouseBI = warehouseBI; }
 
     @RequestMapping(
-            value = "get",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
     public ResponseEntity<ArrayList<WarehouseModel>> selectAllWarehouses(@RequestHeader("Authorization") String authorization){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
-        System.out.println("TOKEN JWT: "+   tokenJwt);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
         String idUsuario = decodedJWT.getSubject();
-        System.out.println("USER: "+idUsuario);
         //Validando si el token es bueno y de autenticación
         if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
             throw new RuntimeException("El token proporcionado no es un token de autenticación");
@@ -51,6 +48,4 @@ public class WarehouseController {
         verifier.verify(tokenJwt);
         return new ResponseEntity<>(this.warehouseBI.selectAllWarehouses(), HttpStatus.OK);
     }
-
-
 }

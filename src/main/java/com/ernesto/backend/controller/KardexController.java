@@ -29,7 +29,7 @@ public class KardexController {
     @Autowired
     public KardexController(KardexBl kardexBl) { this.kardexBl = kardexBl; }
 
-    @RequestMapping(
+   /* @RequestMapping(
             value = "information",
             method = RequestMethod.GET,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -50,7 +50,7 @@ public class KardexController {
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("PirateBay").build();
         verifier.verify(tokenJwt);
         return new ResponseEntity<>(this.kardexBl.returnKardexInformationByMovie(kardexParameterModel.getWarehouse(), kardexParameterModel.getParameter()), HttpStatus.OK);
-    }
+    }*/
 
     @RequestMapping(
             method = RequestMethod.POST,
@@ -74,7 +74,7 @@ public class KardexController {
         return new ResponseEntity<>(this.kardexBl.returnKardexModelByMovie(kardexParameterModel.getWarehouse(), kardexParameterModel.getParameter()), HttpStatus.OK);
     }
 
-    @RequestMapping(
+    /*@RequestMapping(
             value = "orders",
             method = RequestMethod.GET,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -95,5 +95,5 @@ public class KardexController {
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("PirateBay").build();
         verifier.verify(tokenJwt);
         return new ResponseEntity<>(this.kardexBl.returnNotReceivedOrders(kardexParameterModel.getWarehouse(), kardexParameterModel.getParameter()), HttpStatus.OK);
-    }
+    }*/
 }

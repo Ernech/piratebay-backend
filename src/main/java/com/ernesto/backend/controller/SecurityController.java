@@ -30,8 +30,12 @@ public class SecurityController {
         this.securityBl = securityBl;
     }
 
-    @RequestMapping(value="login",method = RequestMethod.POST,produces =  MediaType.APPLICATION_JSON_VALUE,
+    @RequestMapping(
+            value="login",
+            method = RequestMethod.POST,
+            produces =  MediaType.APPLICATION_JSON_VALUE,
             consumes =MediaType.APPLICATION_JSON_VALUE)
+
     public ResponseEntity<Map<String,Object>>authenticate(@RequestBody CredentialModel credentialModel){
         //Integer userId = securityBl.authenticate(credentialModel.getUsername(),credentialModel.getPassword());
         Map <String,String> tokens = securityBl.authenticate(credentialModel.getUsername(),credentialModel.getPassword());
@@ -48,6 +52,7 @@ public class SecurityController {
             return new ResponseEntity<>(response,HttpStatus.FORBIDDEN);
         }
     }
+
     @RequestMapping(value = "refresh",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE,
     consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String,Object>>authenticate(@RequestBody TokenRefreshModel tokenRefreshModel){

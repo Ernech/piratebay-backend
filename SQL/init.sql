@@ -230,6 +230,14 @@ VALUES
    1, 1, 'root', '127.0.0.1', now(), 'F-4', '2020-05-20 12:00:01', 'Compra'
 );
 
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 1, 1, 2, '2020-06-21 19:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-5', '2020-06-27 12:30:00', 'Compra'
+);
+
 -- Agregando datos a la tabla product-order
 
 INSERT INTO product_order
@@ -280,6 +288,13 @@ VALUES
    50, 1, 1, 'root', '127.0.0.1', now()
 );
 
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 10, 1, 8, 30,
+   25, 1, 1, 'root', '127.0.0.1', now()
+);
 
 -- Query para devolver todos los almacenes
 SELECT wrh.warehouse_id, wrh.warehouse_name
@@ -375,7 +390,7 @@ ORDER BY ord.date_received;
 
 -- Query para obtener las órdenes no recibidas
 
-SELECT ord.order_id, prov.provider_name, ord.date_requested, ord.date_received, ord.receipt,
+SELECT prod_or.provider_product_id, ord.order_id, prov.provider_name, ord.date_requested, ord.date_received, ord.receipt,
        prod_or.qtty_requested, prod_or.qtty_commit
 FROM product prod JOIN product_order prod_or
                        on prod.product_id = prod_or.product_id
@@ -391,22 +406,8 @@ WHERE prod.status = 1
   AND prod_or.qtty_received is Null
   AND wrh.warehouse_id = '1'
   AND prod.product_id = '1'
-GROUP BY ord.order_id, prov.provider_name, ord.date_requested, ord.date_received, ord.receipt,
-         prod_or.qtty_requested, prod_or.qtty_commit;
+GROUP BY prod_or.provider_product_id, ord.order_id, prov.provider_name, ord.date_requested,
+         ord.date_received, ord.receipt, prod_or.qtty_requested, prod_or.qtty_commit;
 
-
-
-
--- Revisar
-ALTER TABLE "order" ADD COLUMN concept varchar(100);
-
-UPDATE "order" SET concept = 'Compra' WHERE order_id = 1;
-UPDATE "order" SET concept = 'Compra' WHERE order_id = 2;
-UPDATE "order" SET concept = 'Compra' WHERE order_id = 3;
-
-UPDATE "order" SET receipt = 'F-1' WHERE order_id = 1;
-UPDATE "order" SET receipt = 'F-2' WHERE order_id = 2;
-UPDATE "order" SET receipt = 'F-3' WHERE order_id = 3;
-
-UPDATE "order" SET date_received =null where order_id = 6;
+-- Hacer un update de la cantidad recibida
 UPDATE product_order SET qtty_received = null where provider_product_id = 8;

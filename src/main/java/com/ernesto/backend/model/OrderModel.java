@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class OrderModel {
 
+    private Integer providerProductId;
     private Integer orderId;
     private String providerName;
     private Date dateReceived;
@@ -16,7 +17,20 @@ public class OrderModel {
     public OrderModel() {
     }
 
-    public OrderModel(Integer orderId, String providerName, Date dateReceived, Date dateRequested, String receipt, Integer qttyOrdered, Integer qttyCommit) {
+    public OrderModel(Integer providerProductId, Integer orderId, String providerName, Date dateReceived, Date dateRequested, String receipt, Integer qttyOrdered, Integer qttyCommit, Integer qttyReceived) {
+        this.providerProductId = providerProductId;
+        this.orderId = orderId;
+        this.providerName = providerName;
+        this.dateReceived = dateReceived;
+        this.dateRequested = dateRequested;
+        this.receipt = receipt;
+        this.qttyOrdered = qttyOrdered;
+        this.qttyCommit = qttyCommit;
+        this.qttyReceived = qttyReceived;
+    }
+
+    public OrderModel(Integer providerProductId, Integer orderId, String providerName, Date dateReceived, Date dateRequested, String receipt, Integer qttyOrdered, Integer qttyCommit) {
+        this.providerProductId = providerProductId;
         this.orderId = orderId;
         this.providerName = providerName;
         this.dateReceived = dateReceived;
@@ -26,15 +40,12 @@ public class OrderModel {
         this.qttyCommit = qttyCommit;
     }
 
-    public OrderModel(Integer orderId, String providerName, Date dateReceived, Date dateRequested, String receipt, Integer qttyOrdered, Integer qttyCommit, Integer qttyReceived) {
-        this.orderId = orderId;
-        this.providerName = providerName;
-        this.dateReceived = dateReceived;
-        this.dateRequested = dateRequested;
-        this.receipt = receipt;
-        this.qttyOrdered = qttyOrdered;
-        this.qttyCommit = qttyCommit;
-        this.qttyReceived = qttyReceived;
+    public Integer getProviderProductId() {
+        return providerProductId;
+    }
+
+    public void setProviderProductId(Integer providerProductId) {
+        this.providerProductId = providerProductId;
     }
 
     public Integer getOrderId() {
@@ -104,7 +115,8 @@ public class OrderModel {
     @Override
     public String toString() {
         return "OrderModel{" +
-                "orderId=" + orderId +
+                "providerProductId=" + providerProductId +
+                ", orderId=" + orderId +
                 ", providerName='" + providerName + '\'' +
                 ", dateReceived=" + dateReceived +
                 ", dateRequested=" + dateRequested +

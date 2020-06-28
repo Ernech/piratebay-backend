@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
 @Service
@@ -101,5 +102,21 @@ public class KardexDao {
             throw new RuntimeException();
         }
         return kardex;
+    }
+
+    public Integer updateQttyReceivedByMovie (int qttyReceived, int providerProductId) {
+        //Implementamos SQL variable binding para evitar SQL injection
+        String query = "UPDATE product_order SET qtty_received = ? where provider_product_id = ?;";
+
+        Integer orderUpdated = null;
+        try {
+            //orderUpdated = jdbcTemplate.queryForObject(query,new Object[]{qttyReceived, providerProductId},Integer.class);
+            orderUpdated = jdbcTemplate.update(query, new Object[]{qttyReceived, providerProductId}, new int[] {Types.INTEGER, Types.INTEGER});
+
+        } catch (Exception e) {
+            System.out.print(e);
+            //throw new RuntimeException();
+        }
+        return orderUpdated;
     }
 }

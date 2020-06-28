@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
 @Service
@@ -34,24 +35,24 @@ public class OrderDao {
 
     public ArrayList<OrderModel> returnOrdersByMovie (int warehouseId, int productId) {
         //Implementamos SQL variable binding para evitar SQL injection
-        String query = "SELECT ord.order_id, prov.provider_name, ord.date_requested, ord.date_received, ord.receipt,\n" +
-                "       prod_or.qtty_requested, prod_or.qtty_commit\n" +
-                "FROM product prod JOIN product_order prod_or\n" +
-                "                       on prod.product_id = prod_or.product_id\n" +
-                "                  JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
-                "                  JOIN provider prov on prov.provider_id = ord.provider_id\n" +
-                "                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
-                "                  JOIN \"user\" usr on usr.user_id = ord.order_user_id\n" +
-                "WHERE prod.status = 1\n" +
-                "  AND prod_or.status = 1\n" +
-                "  AND ord.status = 1\n" +
-                "  AND prov.status = 1\n" +
-                "  AND wrh.status = 1\n" +
-                "  AND prod_or.qtty_received is Null\n" +
-                "  AND wrh.warehouse_id = ? \n" +
-                "  AND prod.product_id = ? \n" +
-                "GROUP BY ord.order_id, prov.provider_name, ord.date_requested, ord.date_received, ord.receipt,\n" +
-                "         prod_or.qtty_requested, prod_or.qtty_commit;";
+        String query = "SELECT prod_or.provider_product_id, ord.order_id, prov.provider_name, ord.date_requested, ord.date_received, ord.receipt,\n" +
+                        "       prod_or.qtty_requested, prod_or.qtty_commit\n" +
+                        "FROM product prod JOIN product_order prod_or\n" +
+                        "                       on prod.product_id = prod_or.product_id\n" +
+                        "                  JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
+                        "                  JOIN provider prov on prov.provider_id = ord.provider_id\n" +
+                        "                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
+                        "                  JOIN \"user\" usr on usr.user_id = ord.order_user_id\n" +
+                        "WHERE prod.status = 1\n" +
+                        "  AND prod_or.status = 1\n" +
+                        "  AND ord.status = 1\n" +
+                        "  AND prov.status = 1\n" +
+                        "  AND wrh.status = 1\n" +
+                        "  AND prod_or.qtty_received is Null\n" +
+                        "  AND wrh.warehouse_id = ? \n" +
+                        "  AND prod.product_id = ? \n" +
+                        "GROUP BY prod_or.provider_product_id, ord.order_id, prov.provider_name, ord.date_requested,\n" +
+                        "         ord.date_received, ord.receipt, prod_or.qtty_requested, prod_or.qtty_commit;";
 
         ArrayList<OrderModel> orders = null;
         try {
@@ -60,12 +61,13 @@ public class OrderDao {
                         @Override
                         public OrderModel mapRow(ResultSet resultSet, int i) throws SQLException {
                             return new OrderModel(resultSet.getInt(1),
-                                    resultSet.getString(2),
-                                    resultSet.getDate(3),
+                                    resultSet.getInt(2),
+                                    resultSet.getString(3),
                                     resultSet.getDate(4),
-                                    resultSet.getString(5),
-                                    resultSet.getInt(6),
-                                    resultSet.getInt(7));
+                                    resultSet.getDate(5),
+                                    resultSet.getString(6),
+                                    resultSet.getInt(7),
+                                    resultSet.getInt(8));
                         }
                     });
 

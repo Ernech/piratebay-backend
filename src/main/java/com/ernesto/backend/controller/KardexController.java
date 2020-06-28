@@ -64,6 +64,7 @@ public class KardexController {
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
         String idUsuario = decodedJWT.getSubject();
         System.out.println("USER: "+idUsuario);
+        System.out.println("ID warehouse: "+kardexParameterModel.getWarehouseId()+ " Parameter "+kardexParameterModel.getParameter());
         //Validando si el token es bueno y de autenticación
         if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
             throw new RuntimeException("El token proporcionado no es un token de autenticación");
@@ -71,7 +72,7 @@ public class KardexController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("PirateBay").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.kardexBl.returnKardexModelByMovie(kardexParameterModel.getWarehouse(), kardexParameterModel.getParameter()), HttpStatus.OK);
+        return new ResponseEntity<>(this.kardexBl.returnKardexModelByMovie(kardexParameterModel.getWarehouseId(), kardexParameterModel.getParameter()), HttpStatus.OK);
     }
 
     /*@RequestMapping(

@@ -35,7 +35,7 @@ public class KardexController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<ArrayList<KardexInformationModel>> returnKardexInformationByMovie (@RequestHeader("Authorization") String authorization, @RequestBody KardexParameterModel kardexParameterModel){
+    public ResponseEntity<KardexInformationModel> returnKardexInformationByMovie (@RequestHeader("Authorization") String authorization, @RequestBody KardexParameterModel kardexParameterModel){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);

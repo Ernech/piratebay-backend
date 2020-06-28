@@ -22,7 +22,7 @@ public class KardexDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public ArrayList<KardexInformationModel> returnKardexInformationByMovie (int warehouseId, int productId) {
+    public KardexInformationModel returnKardexInformationByMovie (int warehouseId, int productId) {
         //Implementamos SQL variable binding para evitar SQL injection
         String query = "SELECT prod.product_code, prod.product_name, prod.format, wrh.warehouse_address, prov.provider_name\n" +
                         "FROM product prod JOIN product_order prod_or\n" +
@@ -39,9 +39,9 @@ public class KardexDao {
                         "  AND prod.product_id = ? \n" +
                         "GROUP BY prod.product_code, prod.product_name, prod.format, wrh.warehouse_address, prov.provider_name;";
 
-        ArrayList<KardexInformationModel> information = null;
+        KardexInformationModel information = null;
         try {
-            information = (ArrayList<KardexInformationModel>) jdbcTemplate.query(query, new Object[]{warehouseId, productId}, new RowMapper<KardexInformationModel>() {
+            information = (KardexInformationModel) jdbcTemplate.queryForObject(query, new Object[]{warehouseId, productId}, new RowMapper<KardexInformationModel>() {
                 @Override
                 public KardexInformationModel mapRow(ResultSet resultSet, int i) throws SQLException {
                     return new KardexInformationModel(resultSet.getString(1),

@@ -20,7 +20,7 @@ public class KardexBl {
         this.kardexDao = kardexDao;
     }
 
-    public ArrayList<KardexInformationModel> returnKardexInformationByMovie (int warehouseId, int productId){
+    public KardexInformationModel returnKardexInformationByMovie (int warehouseId, int productId){
         return this.kardexDao.returnKardexInformationByMovie(warehouseId, productId);
     }
 

@@ -13,13 +13,13 @@ Accept: application/json
 ###
 
 GET http://localhost:8008/api/v1/kardex
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMjgyODJ9.RKiBn4jNYb4jZGxVGKEpHNuc8o3vg1C9fup9--9clFk
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzMTEzMTV9.klCxa0ZpPXx_L8pjKfyN7rYWpYjTSWNWzmiTYa920Js
 Content-Type: application/json
 Accept: application/json
 
 {
   "warehouse": "La Paz",
-  "parameter": "A la hora señalada"
+  "parameter": "1"
 }
 
 ###
@@ -31,7 +31,7 @@ Accept: application/json
 
 {
   "warehouse": "La Paz",
-  "parameter": "A la hora señalada"
+  "parameter": "1"
 }
 
 ###

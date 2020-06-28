@@ -35,7 +35,7 @@ public class KardexController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<ArrayList<KardexInformationModel>> returnKardexInformationByMovie (@RequestHeader("Authorization") String authorization, @RequestBody ParameterModel parameterModel){
+    public ResponseEntity<ArrayList<KardexInformationModel>> returnKardexInformationByMovie (@RequestHeader("Authorization") String authorization, @RequestBody KardexParameterModel kardexParameterModel){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         System.out.println("TOKEN JWT: "+   tokenJwt);
@@ -49,7 +49,7 @@ public class KardexController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("PirateBay").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.kardexBl.returnKardexInformationByMovie(parameterModel.getWarehouse(), parameterModel.getParameter()), HttpStatus.OK);
+        return new ResponseEntity<>(this.kardexBl.returnKardexInformationByMovie(kardexParameterModel.getWarehouse(), kardexParameterModel.getParameter()), HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -57,7 +57,7 @@ public class KardexController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<ArrayList<KardexModel>> returnKardexModelByMovie (@RequestHeader("Authorization") String authorization, @RequestBody ParameterModel parameterModel){
+    public ResponseEntity<ArrayList<KardexModel>> returnKardexModelByMovie (@RequestHeader("Authorization") String authorization, @RequestBody KardexParameterModel kardexParameterModel){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         System.out.println("TOKEN JWT: "+   tokenJwt);
@@ -71,7 +71,7 @@ public class KardexController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("PirateBay").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.kardexBl.returnKardexModelByMovie(parameterModel.getWarehouse(), parameterModel.getParameter()), HttpStatus.OK);
+        return new ResponseEntity<>(this.kardexBl.returnKardexModelByMovie(kardexParameterModel.getWarehouse(), kardexParameterModel.getParameter()), HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -80,7 +80,7 @@ public class KardexController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<ArrayList<OrderModel>> returnOrdersByMovie (@RequestHeader("Authorization") String authorization, @RequestBody ParameterModel parameterModel){
+    public ResponseEntity<ArrayList<OrderModel>> returnOrdersByMovie (@RequestHeader("Authorization") String authorization, @RequestBody KardexParameterModel kardexParameterModel){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         System.out.println("TOKEN JWT: "+   tokenJwt);
@@ -94,6 +94,6 @@ public class KardexController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("PirateBay").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.kardexBl.returnNotReceivedOrders(parameterModel.getWarehouse(), parameterModel.getParameter()), HttpStatus.OK);
+        return new ResponseEntity<>(this.kardexBl.returnNotReceivedOrders(kardexParameterModel.getWarehouse(), kardexParameterModel.getParameter()), HttpStatus.OK);
     }
 }

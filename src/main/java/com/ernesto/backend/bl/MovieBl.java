@@ -18,8 +18,8 @@ public class MovieBl {
         this.movieDao = movieDao;
     }
 
-    public ArrayList<MovieModel> selectMoviesFromWarehouse(String warehouse){
-        return this.movieDao.selectMoviesFromWarehouse(warehouse);
+    public ArrayList<MovieModel> selectMoviesFromWarehouse(Integer warehouseId){
+        return this.movieDao.selectMoviesFromWarehouse(warehouseId);
     }
 
     public ArrayList<MovieModel> searchMoviesByParameter(String warehouse, String parameter){

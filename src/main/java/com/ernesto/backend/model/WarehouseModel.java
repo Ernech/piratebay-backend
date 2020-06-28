@@ -2,22 +2,38 @@ package com.ernesto.backend.model;
 
 public class WarehouseModel {
 
-    private String warehouse;
+    private Integer warehouseId;
+    private String warehouseName;
 
     public WarehouseModel() {
     }
 
-    public WarehouseModel(String warehouse) {
-        this.warehouse = warehouse;
+    public WarehouseModel(Integer warehouseId, String warehouseName) {
+        this.warehouseId = warehouseId;
+        this.warehouseName = warehouseName;
     }
 
-    public String getWarehouse() {
-        return warehouse;
+    public Integer getWarehouseId() {
+        return warehouseId;
     }
 
-    public void setWarehouse(String warehouse) {
-        this.warehouse = warehouse;
+    public void setWarehouseId(Integer warehouseId) {
+        this.warehouseId = warehouseId;
     }
 
+    public String getWarehouseName() {
+        return warehouseName;
+    }
 
+    public void setWarehouseName(String warehouseName) {
+        this.warehouseName = warehouseName;
+    }
+
+    @Override
+    public String toString() {
+        return "WarehouseModel{" +
+                "warehouseId=" + warehouseId +
+                ", warehouseName='" + warehouseName + '\'' +
+                '}';
+    }
 }

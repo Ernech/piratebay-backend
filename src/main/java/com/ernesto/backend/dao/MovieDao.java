@@ -24,7 +24,7 @@ public class MovieDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public ArrayList<MovieModel> selectMoviesFromWarehouse (String warehouse){
+    public ArrayList<MovieModel> selectMoviesFromWarehouse (int warehouseId){
         //Implementamos SQL variable binding para evitar SQL injection
         String query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
                        "FROM product prod JOIN product_order prod_or\n" +
@@ -37,12 +37,12 @@ public class MovieDao {
                        "AND ord.status = 1\n" +
                        "AND prov.status = 1\n" +
                        "AND wrh.status = 1\n" +
-                       "AND wrh.warehouse_name = ? \n" +
+                       "AND wrh.warehouse_id = ? \n" +
                        "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name ;";
 
         ArrayList<MovieModel> movies = null;
         try{
-            movies = (ArrayList<MovieModel>) jdbcTemplate.query(query, new Object[]{warehouse}, new RowMapper<MovieModel>(){
+            movies = (ArrayList<MovieModel>) jdbcTemplate.query(query, new Object[]{warehouseId}, new RowMapper<MovieModel>(){
                 @Override
                 public MovieModel mapRow(ResultSet resultSet, int i) throws SQLException {
                     return new MovieModel(resultSet.getInt(1),

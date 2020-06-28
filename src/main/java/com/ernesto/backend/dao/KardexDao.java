@@ -22,7 +22,7 @@ public class KardexDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public ArrayList<KardexInformationModel> returnKardexInformationByMovie (String warehouse, String parameter) {
+    public ArrayList<KardexInformationModel> returnKardexInformationByMovie (String warehouse, int parameter) {
         //Implementamos SQL variable binding para evitar SQL injection
         String query = "SELECT prod.product_code, prod.product_name, prod.format, wrh.warehouse_address, prov.provider_name\n" +
                         "FROM product prod JOIN product_order prod_or\n" +
@@ -36,7 +36,7 @@ public class KardexDao {
                         "  AND prov.status = 1\n" +
                         "  AND wrh.status = 1\n" +
                         "  AND wrh.warehouse_name = ? \n" +
-                        "  AND prod.product_name = ? \n" +
+                        "  AND prod.product_id = ? \n" +
                         "GROUP BY prod.product_code, prod.product_name, prod.format, wrh.warehouse_address, prov.provider_name;";
 
         ArrayList<KardexInformationModel> information = null;
@@ -58,7 +58,7 @@ public class KardexDao {
         return information;
     }
 
-    public ArrayList<KardexModel> returnKardexModelByMovie (String warehouse, String parameter) {
+    public ArrayList<KardexModel> returnKardexModelByMovie (String warehouse, int parameter) {
         //Implementamos SQL variable binding para evitar SQL injection
         String query = "SELECT ord.date_received, ord.concept, ord.receipt, prod_or.unit_price as ValorUnitario,\n" +
                         "       prod_or.qtty_received as EntradaCantidad, prod_or.unit_price*prod_or.qtty_received as EntradaValor,\n" +
@@ -74,8 +74,8 @@ public class KardexDao {
                         "  AND ord.status = 1\n" +
                         "  AND prov.status = 1\n" +
                         "  AND wrh.status = 1\n" +
-                        "  AND wrh.warehouse_name = 'La Paz'\n" +
-                        "  AND prod.product_name = 'Africa mía'\n" +
+                        "  AND wrh.warehouse_name = ? \n" +
+                        "  AND prod.product_id = ? \n" +
                         "GROUP BY ord.date_received, ord.concept, ord.receipt, prod_or.unit_price, prod_or.qtty_received\n" +
                         "ORDER BY ord.date_received;";
 
@@ -101,7 +101,7 @@ public class KardexDao {
         return kardex;
     }
 
-    public ArrayList<OrderModel> returnOrdersByMovie (String warehouse, String parameter) {
+    public ArrayList<OrderModel> returnOrdersByMovie (String warehouse, int parameter) {
         //Implementamos SQL variable binding para evitar SQL injection
         String query = "SELECT ord.order_id, prov.provider_name, ord.date_requested, ord.receipt,\n" +
                         "       ord.concept, prod.product_id, prod.product_name, prod_or.unit_price,\n" +
@@ -118,9 +118,9 @@ public class KardexDao {
                         "  AND prov.status = 1\n" +
                         "  AND wrh.status = 1\n" +
                         "  AND ord.date_received is Null\n" +
-                        "  AND prod_or.qtty_received is Null\n" +
+                        "  AND prod_or.qtty_received is Null or prod_or.qtty_received < prod_or.qtty_commit\n" +
                         "  AND wrh.warehouse_name = ? \n" +
-                        "  AND prod.product_name = ? \n" +
+                        "  AND prod.product_id = ? \n" +
                         "GROUP BY ord.order_id, prov.provider_name, ord.date_requested, ord.receipt, ord.concept,\n" +
                         "         prod_or.provider_product_id, prod.product_id, prod.product_name, prod_or.unit_price,\n" +
                         "         prod_or.qtty_requested, prod_or.qtty_commit;";

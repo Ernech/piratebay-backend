@@ -1,4 +1,4 @@
-
+-- INSERTANDO EN LA TABLA USUARIO
 INSERT INTO "user"
     ( user_id, username, password, email, phone_number,
     cat_user_status, status, tx_id, tx_username, tx_host,
@@ -9,7 +9,6 @@ VALUES
         now()
     );
 
-
 INSERT INTO "user"
 ( user_id, username, password, email, phone_number,
   cat_user_status, status, tx_id, tx_username, tx_host,
@@ -19,9 +18,6 @@ VALUES
    'ACTIVE', 1, 1, 'root', '127.0.0.1',
    now()
 );
-
-
-
 
 INSERT INTO "user"
 ( user_id, username, password, email, phone_number,
@@ -53,12 +49,7 @@ VALUES
    now()
 );
 
-/* Borrando features */
-
-UPDATE "user_role"
-SET status = 0
-WHERE user_role_id = 3;
-
+-- Insertando los features
 
 INSERT INTO feature (feature_code, feature_name, status, tx_id, tx_username, tx_host, tx_date)
 VALUES ('PAGE_USER_MANAGEMENT', 'Gestión de usuarios', 1, 1, 'admin', 'localhost', now());
@@ -69,6 +60,7 @@ VALUES ('PAGE_PRODUCT_MANAGEMENT', 'Gestión de productos', 1, 1, 'admin', 'loca
 INSERT INTO feature (feature_code, feature_name, status, tx_id, tx_username, tx_host, tx_date)
 VALUES ('BUTTON_DELETE_USER', 'Botón para eliminar un usuario', 1, 1, 'admin', 'localhost', now());
 
+-- Insertando los roles
 
 INSERT INTO role ( role_name, status, tx_id, tx_username, tx_host, tx_date)
 VALUES ('ADMIN', 1,  1, 'admin', 'localhost', now());
@@ -79,7 +71,9 @@ VALUES ('WAREHOUSE_SUPERVISOR', 1,  1, 'admin', 'localhost', now());
 INSERT INTO role ( role_name, status, tx_id, tx_username, tx_host, tx_date)
 VALUES ('WAREHOUSE_EMPLOYEE', 1,  1, 'admin', 'localhost', now());
 
+-- Insertando los features de cada rol
 -- ADMIN role
+
 INSERT INTO role_feature ( role_id, feature_id, status, tx_id, tx_username, tx_host, tx_date)
 VALUES (1, 1, 1,  1, 'admin', 'localhost', now());
 
@@ -93,11 +87,11 @@ VALUES (2, 1, 1,  1, 'admin', 'localhost', now());
 INSERT INTO role_feature ( role_id, feature_id, status, tx_id, tx_username, tx_host, tx_date)
 VALUES (2, 2, 1,  1, 'admin', 'localhost', now());
 
--- WAREHOUSE_EMPLOYY
+-- WAREHOUSE_EMPLOYEE
 INSERT INTO role_feature ( role_id, feature_id, status, tx_id, tx_username, tx_host, tx_date)
 VALUES (3, 2, 1,  1, 'admin', 'localhost', now());
 
--- CONFIGURACIÓN DE USUARIOS
+-- Configuración de los usuarios y sus roles
 
 INSERT INTO user_role ( user_id, role_id, status, tx_id, tx_username, tx_host, tx_date)
 VALUES (2, 2, 1,  1, 'admin', 'localhost', now());
@@ -108,21 +102,7 @@ VALUES (2, 1, 1,  1, 'admin', 'localhost', now());
 INSERT INTO user_role ( user_id, role_id, status, tx_id, tx_username, tx_host, tx_date)
 VALUES (2, 3, 1,  1, 'admin', 'localhost', now());
 
--- CAMBIOS A LA BASE DE DATOS
-
-ALTER TABLE warehouse ALTER COLUMN warehouse_name TYPE varchar(100);
-
-ALTER TABLE provider ALTER COLUMN provider_name TYPE varchar(100);
-
-ALTER TABLE "order" ADD COLUMN receipt varchar(100);
-
--- ALTER TABLE product RENAME COLUMN product_attributes TO format;
-
-ALTER TABLE product ALTER COLUMN product_description TYPE text;
-
-ALTER TABLE product ADD COLUMN creation_date timestamp;
-
--- CONFIGURACIÓN TABLA PRODUCT
+-- Insertando películas
 
 INSERT INTO product
 ( product_id, product_code, cat_product_type, product_name, product_description,
@@ -156,17 +136,7 @@ VALUES
    'Blue-Ray', 1, 1, 'root', '127.0.0.1', now()
 );
 
-UPDATE product SET format = 'DVD' WHERE product_id = 1;
-UPDATE product SET format = 'DVD' WHERE product_id = 3;
-UPDATE product SET format = 'Blu-Ray' WHERE product_id = 2;
-UPDATE product SET format = 'Blu-Ray' WHERE product_id = 4;
-
-UPDATE product SET creation_date = '2020-01-15' WHERE product_id = 1;
-UPDATE product SET creation_date = '2020-01-16' WHERE product_id = 2;
-UPDATE product SET creation_date = '2020-01-17' WHERE product_id = 3;
-UPDATE product SET creation_date = '2020-01-18' WHERE product_id = 4;
-
--- CONFIGURACION TABLA DE PROVIDER
+-- Insertando a los proveedores
 
 INSERT INTO provider
 ( provider_id, provider_name, cat_country,
@@ -184,7 +154,7 @@ VALUES
    1, 1, 'root', '127.0.0.1', now()
 );
 
--- CONFIGURACION TABLA DE WAREHOUSE
+-- Agregando los almacenes
 
 INSERT INTO warehouse
 ( warehouse_id, warehouse_name, warehouse_address,
@@ -226,7 +196,7 @@ VALUES
    1, 1, 'root', '127.0.0.1', now()
 );
 
--- CONFIGURACION TABLA DE ORDER
+-- Agregando órdenes a la tabla
 
 INSERT INTO "order"
 ( order_id, provider_id, warehouse_id, order_user_id, date_requested,
@@ -241,7 +211,7 @@ INSERT INTO "order"
   status, tx_id, tx_username, tx_host, tx_date, receipt, date_received)
 VALUES
 (  nextval('order_order_id_seq'), 2, 1, 2, '2020-05-10 10:30:00',
-   1, 1, 'root', '127.0.0.1', now(), 'F-1', '2020-05-21 14:05:00'
+   1, 1, 'root', '127.0.0.1', now(), 'F-2', '2020-05-21 14:05:00'
 );
 
 INSERT INTO "order"
@@ -249,10 +219,10 @@ INSERT INTO "order"
   status, tx_id, tx_username, tx_host, tx_date, receipt, date_received)
 VALUES
 (  nextval('order_order_id_seq'), 1, 1, 2, '2020-05-24 11:40:00',
-   1, 1, 'root', '127.0.0.1', now(), 'F-1', '2020-06-03 17:10:00'
+   1, 1, 'root', '127.0.0.1', now(), 'F-3', '2020-06-03 17:10:00'
 );
 
--- CONFIGURACION TABLA DE PRODUCT-ORDER
+-- Agregando datos a la tabla product-order
 
 INSERT INTO product_order
 ( provider_product_id, order_id, product_id, unit_price, qtty_requested,
@@ -294,19 +264,27 @@ VALUES
    40, 40, 1, 1, 'root', '127.0.0.1', now()
 );
 
+-- Query para devolver todos los almacenes
+
+SELECT wrh.warehouse_id, wrh.warehouse_name
+FROM warehouse wrh
+  WHERE wrh.status = 1
+GROUP BY wrh.warehouse_id, wrh.warehouse_name;
+
+
 -- Query para la lista de películas de un almacén
 SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)
 FROM product prod JOIN product_order prod_or
-on prod.product_id = prod_or.product_id
-JOIN "order" ord on ord.order_id = prod_or.order_id
-JOIN provider prov on prov.provider_id = ord.provider_id
-JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
+                       on prod.product_id = prod_or.product_id
+                  JOIN "order" ord on ord.order_id = prod_or.order_id
+                  JOIN provider prov on prov.provider_id = ord.provider_id
+                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
 WHERE prod.status = 1
-AND prod_or.status = 1
-AND ord.status = 1
-AND prov.status = 1
-AND wrh.status = 1
-AND wrh.warehouse_name = 'La Paz'
+  AND prod_or.status = 1
+  AND ord.status = 1
+  AND prov.status = 1
+  AND wrh.status = 1
+  AND wrh.warehouse_id = '1'
 GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name ;
 
 -- Query para buscar una película por su nombre
@@ -389,85 +367,9 @@ UPDATE "order" SET receipt = 'F-3' WHERE order_id = 3;
 
 -- Agregando órdenes para el kardex
 
-INSERT INTO "order"
-( order_id, provider_id, warehouse_id, order_user_id, date_requested,
-  status, tx_id, tx_username, tx_host, tx_date, receipt, concept)
-VALUES
-(  nextval('order_order_id_seq'), 1, 1, 2, '2020-06-15 15:30:00',
-   1, 1, 'root', '127.0.0.1', now(), 'F-4', 'Compra'
-);
 
-INSERT INTO "order"
-( order_id, provider_id, warehouse_id, order_user_id, date_requested,
-  status, tx_id, tx_username, tx_host, tx_date, receipt, concept)
-VALUES
-(  nextval('order_order_id_seq'), 2, 1, 2, '2020-06-18 10:20:00',
-   1, 1, 'root', '127.0.0.1', now(), 'F-5', 'Compra'
-);
 
-INSERT INTO "order"
-( order_id, provider_id, warehouse_id, order_user_id, date_requested,
-  status, tx_id, tx_username, tx_host, tx_date, receipt, concept)
-VALUES
-(  nextval('order_order_id_seq'), 2, 1, 2, '2020-06-21 12:35:00',
-   1, 1, 'root', '127.0.0.1', now(), 'F-6', 'Compra'
-);
 
-INSERT INTO "order"
-( order_id, provider_id, warehouse_id, order_user_id, date_requested,
-  status, tx_id, tx_username, tx_host, tx_date, receipt, concept)
-VALUES
-(  nextval('order_order_id_seq'), 1, 1, 2, '2020-06-23 13:20:00',
-   1, 1, 'root', '127.0.0.1', now(), 'F-7', 'Compra'
-);
-
-INSERT INTO "order"
-( order_id, provider_id, warehouse_id, order_user_id, date_requested,
-  status, tx_id, tx_username, tx_host, tx_date, receipt, concept)
-VALUES
-(  nextval('order_order_id_seq'), 1, 1, 2, '2020-06-26 10:00:00',
-   1, 1, 'root', '127.0.0.1', now(), 'F-8', 'Compra'
-);
-
-INSERT INTO product_order
-( provider_product_id, order_id, product_id, unit_price, qtty_requested,
-  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
-VALUES
-(  nextval('product_order_provider_product_id_seq'), 4, 1, 8, 70,
-   70, 1, 1, 'root', '127.0.0.1', now()
-);
-
-INSERT INTO product_order
-( provider_product_id, order_id, product_id, unit_price, qtty_requested,
-  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
-VALUES
-(  nextval('product_order_provider_product_id_seq'), 5, 2, 8, 50,
-   45, 1, 1, 'root', '127.0.0.1', now()
-);
-
-INSERT INTO product_order
-( provider_product_id, order_id, product_id, unit_price, qtty_requested,
-  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
-VALUES
-(  nextval('product_order_provider_product_id_seq'), 6, 3, 8, 30,
-   30, 1, 1, 'root', '127.0.0.1', now()
-);
-
-INSERT INTO product_order
-( provider_product_id, order_id, product_id, unit_price, qtty_requested,
-  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
-VALUES
-(  nextval('product_order_provider_product_id_seq'), 7, 4, 10, 30,
-   20, 1, 1, 'root', '127.0.0.1', now()
-);
-
-INSERT INTO product_order
-( provider_product_id, order_id, product_id, unit_price, qtty_requested,
-  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
-VALUES
-(  nextval('product_order_provider_product_id_seq'), 8, 1, 10, 60,
-   55, 1, 1, 'root', '127.0.0.1', now()
-);
 
 
 -- Query para obtener las órdenes no recibidas

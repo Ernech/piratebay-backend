@@ -53,7 +53,7 @@ public class MovieController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("PirateBay").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.movieBl.selectMoviesFromWarehouse(warehouseModel.getWarehouse()), HttpStatus.OK);
+        return new ResponseEntity<>(this.movieBl.selectMoviesFromWarehouse(warehouseModel.getWarehouseId()), HttpStatus.OK);
     }
 
     @RequestMapping(

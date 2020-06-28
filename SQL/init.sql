@@ -238,6 +238,14 @@ VALUES
    1, 1, 'root', '127.0.0.1', now(), 'F-5', '2020-06-27 12:30:00', 'Compra'
 );
 
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 1, 1, 2, '2020-06-28 11:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-6', '2020-07-02 12:30:00', 'Compra'
+);
+
 -- Agregando datos a la tabla product-order
 
 INSERT INTO product_order
@@ -294,6 +302,14 @@ INSERT INTO product_order
 VALUES
 (  nextval('product_order_provider_product_id_seq'), 10, 1, 8, 30,
    25, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 11, 1, 9, 40,
+   40, 1, 1, 'root', '127.0.0.1', now()
 );
 
 -- Query para devolver todos los almacenes

@@ -1,14 +1,14 @@
 package com.ernesto.backend.model;
 
-public class KardexParameterModel {
+public class OrderParameterModel {
 
     private Integer warehouseId;
     private Integer productId;
 
-    public KardexParameterModel() {
+    public OrderParameterModel() {
     }
 
-    public KardexParameterModel(Integer warehouseId, Integer productId) {
+    public OrderParameterModel(Integer warehouseId, Integer productId) {
         this.warehouseId = warehouseId;
         this.productId = productId;
     }
@@ -31,7 +31,7 @@ public class KardexParameterModel {
 
     @Override
     public String toString() {
-        return "KardexParameterModel{" +
+        return "OrderParameterModel{" +
                 "warehouseId=" + warehouseId +
                 ", productId=" + productId +
                 '}';

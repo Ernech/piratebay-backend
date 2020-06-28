@@ -1,38 +1,27 @@
-##
+## Obtener la información de una película
 
-GET http://localhost:8008/api/v1/kardex/information
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMjYzNDR9.Eg930i41yzhgJzXMGU8UJiFbF4IC5zh7C-dNOjc5xo8
+POST http://localhost:8008/api/v1/kardex/information
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNjU2NzZ9.3qIjOxexsFpPZbvFjZzL9AYdWAv_7G2UN_wYLzFQjVY
 Content-Type: application/json
 Accept: application/json
 
 {
-  "warehouse": "La Paz",
-  "parameter": "Africa mía"
+  "warehouseId": "1",
+  "productId": "1"
 }
 
-###
+### Obtener el kardex como tal
 
 POST http://localhost:8008/api/v1/kardex
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNTkyMTF9.p0PAnT-G1I9Kgq3TjkV_HbXlBrQO5-I4bEl_C8ncftE
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNjU4MjZ9.bkHDIl5gC_Vp3CBdqm6Jx5vw1IfXTYJXNdD0c1jS2Bw
 Content-Type: application/json
 Accept: application/json
 
 {
   "warehouseId":1,
-  "parameter": 1
+  "productId": 1
 }
 
 ###
 
-GET http://localhost:8008/api/v1/kardex/orders
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzMTQ3MjR9.mf0W2Yu-SWFaSR0VTcdaXbVxpzXS4x5EB5Oq1edovW0
-Content-Type: application/json
-Accept: application/json
-
-{
-  "warehouse": "La Paz",
-  "parameter": "1"
-}
-
-###
 

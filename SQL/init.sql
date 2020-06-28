@@ -200,26 +200,34 @@ VALUES
 
 INSERT INTO "order"
 ( order_id, provider_id, warehouse_id, order_user_id, date_requested,
-  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received)
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
 VALUES
 (  nextval('order_order_id_seq'), 1, 1, 2, '2020-04-05 15:30:00',
-   1, 1, 'root', '127.0.0.1', now(), 'F-1', '2020-04-15 12:00:01'
+   1, 1, 'root', '127.0.0.1', now(), 'F-1', '2020-04-15 12:00:01', 'Compra'
 );
 
 INSERT INTO "order"
 ( order_id, provider_id, warehouse_id, order_user_id, date_requested,
-  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received)
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
 VALUES
 (  nextval('order_order_id_seq'), 2, 1, 2, '2020-05-10 10:30:00',
-   1, 1, 'root', '127.0.0.1', now(), 'F-2', '2020-05-21 14:05:00'
+   1, 1, 'root', '127.0.0.1', now(), 'F-2', '2020-05-21 14:05:00', 'Compra'
 );
 
 INSERT INTO "order"
 ( order_id, provider_id, warehouse_id, order_user_id, date_requested,
-  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received)
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
 VALUES
 (  nextval('order_order_id_seq'), 1, 1, 2, '2020-05-24 11:40:00',
-   1, 1, 'root', '127.0.0.1', now(), 'F-3', '2020-06-03 17:10:00'
+   1, 1, 'root', '127.0.0.1', now(), 'F-3', '2020-06-03 17:10:00', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 1, 1, 2, '2020-05-13 15:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-4', '2020-05-20 12:00:01', 'Compra'
 );
 
 -- Agregando datos a la tabla product-order
@@ -262,6 +270,14 @@ INSERT INTO product_order
 VALUES
 (  nextval('product_order_provider_product_id_seq'), 3, 1, 10, 40,
    40, 40, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 9, 1, 10, 50,
+   50, 1, 1, 'root', '127.0.0.1', now()
 );
 
 
@@ -320,10 +336,6 @@ WHERE prod.status = 1
 GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name
 ORDER BY prod.product_code ASC;
 
-
-
-
-
 -- Query para obtener la información general del kardex
 SELECT prod.product_code, prod.product_name, prod.format, wrh.warehouse_address, prov.provider_name
 FROM product prod JOIN product_order prod_or
@@ -336,8 +348,8 @@ WHERE prod.status = 1
   AND ord.status = 1
   AND prov.status = 1
   AND wrh.status = 1
-  AND prod.product_name = 'Africa mía'
-  AND wrh.warehouse_name = 'La Paz'
+  AND wrh.warehouse_id = '1'
+  AND prod.product_id = '1'
 GROUP BY prod.product_code, prod.product_name, prod.format, wrh.warehouse_address, prov.provider_name;
 
 -- Query para obtener el kardex
@@ -355,32 +367,15 @@ WHERE prod.status = 1
   AND ord.status = 1
   AND prov.status = 1
   AND wrh.status = 1
-  AND wrh.warehouse_name = 'La Paz'
-  AND prod.product_name = 'A la hora señalada'
+  AND wrh.warehouse_id = '1'
+  AND prod.product_id = '1'
+  AND prod_or.qtty_received is not Null
 GROUP BY ord.date_received, ord.concept, ord.receipt, prod_or.unit_price, prod_or.qtty_received
 ORDER BY ord.date_received;
 
-ALTER TABLE "order" ADD COLUMN concept varchar(100);
-
-UPDATE "order" SET concept = 'Compra' WHERE order_id = 1;
-UPDATE "order" SET concept = 'Compra' WHERE order_id = 2;
-UPDATE "order" SET concept = 'Compra' WHERE order_id = 3;
-
-UPDATE "order" SET receipt = 'F-1' WHERE order_id = 1;
-UPDATE "order" SET receipt = 'F-2' WHERE order_id = 2;
-UPDATE "order" SET receipt = 'F-3' WHERE order_id = 3;
-
--- Agregando órdenes para el kardex
-
-
-
-
-
-
 -- Query para obtener las órdenes no recibidas
 
-SELECT ord.order_id, prov.provider_name, ord.date_requested, ord.receipt,
-       ord.concept, prod_or.provider_product_id, prod.product_id, prod.product_name, prod_or.unit_price,
+SELECT ord.order_id, prov.provider_name, ord.date_requested, ord.date_received, ord.receipt,
        prod_or.qtty_requested, prod_or.qtty_commit
 FROM product prod JOIN product_order prod_or
                        on prod.product_id = prod_or.product_id
@@ -393,13 +388,25 @@ WHERE prod.status = 1
   AND ord.status = 1
   AND prov.status = 1
   AND wrh.status = 1
-  AND ord.date_received is Null
   AND prod_or.qtty_received is Null
-  AND wrh.warehouse_name = 'La Paz'
-  AND prod.product_name = 'A la hora señalada'
-GROUP BY ord.order_id, prov.provider_name, ord.date_requested, ord.receipt, ord.concept,
-         prod_or.provider_product_id, prod_or.provider_product_id, prod.product_id,
-         prod.product_name, prod_or.unit_price, prod_or.qtty_requested, prod_or.qtty_commit;
+  AND wrh.warehouse_id = '1'
+  AND prod.product_id = '1'
+GROUP BY ord.order_id, prov.provider_name, ord.date_requested, ord.date_received, ord.receipt,
+         prod_or.qtty_requested, prod_or.qtty_commit;
+
+
+
+
+-- Revisar
+ALTER TABLE "order" ADD COLUMN concept varchar(100);
+
+UPDATE "order" SET concept = 'Compra' WHERE order_id = 1;
+UPDATE "order" SET concept = 'Compra' WHERE order_id = 2;
+UPDATE "order" SET concept = 'Compra' WHERE order_id = 3;
+
+UPDATE "order" SET receipt = 'F-1' WHERE order_id = 1;
+UPDATE "order" SET receipt = 'F-2' WHERE order_id = 2;
+UPDATE "order" SET receipt = 'F-3' WHERE order_id = 3;
 
 UPDATE "order" SET date_received =null where order_id = 6;
 UPDATE product_order SET qtty_received = null where provider_product_id = 8;

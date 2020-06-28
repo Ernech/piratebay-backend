@@ -6,31 +6,35 @@ public class OrderModel {
 
     private Integer orderId;
     private String providerName;
+    private Date dateReceived;
     private Date dateRequested;
     private String receipt;
-    private String concept;
-    private Integer providerProductId;
-    private Integer productId;
-    private String productName;
-    private Double unitPrice;
-    private Integer qttyRequested;
+    private Integer qttyOrdered;
     private Integer qttyCommit;
+    private Integer qttyReceived;
 
     public OrderModel() {
     }
 
-    public OrderModel(Integer orderId, String providerName, Date dateRequested, String receipt, String concept, Integer providerProductId, Integer productId, String productName, Double unitPrice, Integer qttyRequested, Integer qttyCommit) {
+    public OrderModel(Integer orderId, String providerName, Date dateReceived, Date dateRequested, String receipt, Integer qttyOrdered, Integer qttyCommit) {
         this.orderId = orderId;
         this.providerName = providerName;
+        this.dateReceived = dateReceived;
         this.dateRequested = dateRequested;
         this.receipt = receipt;
-        this.concept = concept;
-        this.providerProductId = providerProductId;
-        this.productId = productId;
-        this.productName = productName;
-        this.unitPrice = unitPrice;
-        this.qttyRequested = qttyRequested;
+        this.qttyOrdered = qttyOrdered;
         this.qttyCommit = qttyCommit;
+    }
+
+    public OrderModel(Integer orderId, String providerName, Date dateReceived, Date dateRequested, String receipt, Integer qttyOrdered, Integer qttyCommit, Integer qttyReceived) {
+        this.orderId = orderId;
+        this.providerName = providerName;
+        this.dateReceived = dateReceived;
+        this.dateRequested = dateRequested;
+        this.receipt = receipt;
+        this.qttyOrdered = qttyOrdered;
+        this.qttyCommit = qttyCommit;
+        this.qttyReceived = qttyReceived;
     }
 
     public Integer getOrderId() {
@@ -49,6 +53,14 @@ public class OrderModel {
         this.providerName = providerName;
     }
 
+    public Date getDateReceived() {
+        return dateReceived;
+    }
+
+    public void setDateReceived(Date dateReceived) {
+        this.dateReceived = dateReceived;
+    }
+
     public Date getDateRequested() {
         return dateRequested;
     }
@@ -65,52 +77,12 @@ public class OrderModel {
         this.receipt = receipt;
     }
 
-    public String getConcept() {
-        return concept;
+    public Integer getQttyOrdered() {
+        return qttyOrdered;
     }
 
-    public void setConcept(String concept) {
-        this.concept = concept;
-    }
-
-    public Integer getProviderProductId() {
-        return providerProductId;
-    }
-
-    public void setProviderProductId(Integer providerProductId) {
-        this.providerProductId = providerProductId;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public Double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(Double unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public Integer getQttyRequested() {
-        return qttyRequested;
-    }
-
-    public void setQttyRequested(Integer qttyRequested) {
-        this.qttyRequested = qttyRequested;
+    public void setQttyOrdered(Integer qttyOrdered) {
+        this.qttyOrdered = qttyOrdered;
     }
 
     public Integer getQttyCommit() {
@@ -121,20 +93,25 @@ public class OrderModel {
         this.qttyCommit = qttyCommit;
     }
 
+    public Integer getQttyReceived() {
+        return qttyReceived;
+    }
+
+    public void setQttyReceived(Integer qttyReceived) {
+        this.qttyReceived = qttyReceived;
+    }
+
     @Override
     public String toString() {
         return "OrderModel{" +
                 "orderId=" + orderId +
                 ", providerName='" + providerName + '\'' +
+                ", dateReceived=" + dateReceived +
                 ", dateRequested=" + dateRequested +
                 ", receipt='" + receipt + '\'' +
-                ", concept='" + concept + '\'' +
-                ", providerProductId=" + providerProductId +
-                ", productId=" + productId +
-                ", productName='" + productName + '\'' +
-                ", unitPrice=" + unitPrice +
-                ", qttyRequested=" + qttyRequested +
+                ", qttyOrdered=" + qttyOrdered +
                 ", qttyCommit=" + qttyCommit +
+                ", qttyReceived=" + qttyReceived +
                 '}';
     }
 }

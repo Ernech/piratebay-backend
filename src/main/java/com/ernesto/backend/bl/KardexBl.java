@@ -20,16 +20,12 @@ public class KardexBl {
         this.kardexDao = kardexDao;
     }
 
-    public ArrayList<KardexInformationModel> returnKardexInformationByMovie (String warehouse, int productId){
-        return this.kardexDao.returnKardexInformationByMovie(warehouse, productId);
+    public ArrayList<KardexInformationModel> returnKardexInformationByMovie (int warehouseId, int productId){
+        return this.kardexDao.returnKardexInformationByMovie(warehouseId, productId);
     }
 
-    public ArrayList<KardexModel> returnKardexModelByMovie (int warehouseId, int productId){
-        return this.kardexDao.returnKardexModelByMovie(warehouseId, productId);
-    }
-
-    public ArrayList<OrderModel> returnNotReceivedOrders (String warehouse, int productId){
-        return this.kardexDao.returnOrdersByMovie(warehouse, productId);
+    public ArrayList<KardexModel> returnKardexByMovie (int warehouseId, int productId){
+        return this.kardexDao.returnKardexByMovie(warehouseId, productId);
     }
 }
 

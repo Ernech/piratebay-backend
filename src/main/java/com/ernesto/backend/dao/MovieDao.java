@@ -27,18 +27,19 @@ public class MovieDao {
     public ArrayList<MovieModel> selectMoviesFromWarehouse (int warehouseId){
         //Implementamos SQL variable binding para evitar SQL injection
         String query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
-                       "FROM product prod JOIN product_order prod_or\n" +
-                       "on prod.product_id = prod_or.product_id\n" +
-                       "JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
-                       "JOIN provider prov on prov.provider_id = ord.provider_id\n" +
-                       "JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
-                       "WHERE prod.status = 1\n" +
-                       "AND prod_or.status = 1\n" +
-                       "AND ord.status = 1\n" +
-                       "AND prov.status = 1\n" +
-                       "AND wrh.status = 1\n" +
-                       "AND wrh.warehouse_id = ? \n" +
-                       "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name ;";
+                        "FROM product prod JOIN product_order prod_or\n" +
+                        "                       on prod.product_id = prod_or.product_id\n" +
+                        "                  JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
+                        "                  JOIN provider prov on prov.provider_id = ord.provider_id\n" +
+                        "                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
+                        "WHERE prod.status = 1\n" +
+                        "  AND prod_or.status = 1\n" +
+                        "  AND ord.status = 1\n" +
+                        "  AND prov.status = 1\n" +
+                        "  AND wrh.status = 1\n" +
+                        "  AND wrh.warehouse_id = ? \n" +
+                        "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name\n" +
+                        "ORDER BY prod.product_name;";
 
         ArrayList<MovieModel> movies = null;
         try{
@@ -60,7 +61,7 @@ public class MovieDao {
         return movies;
     }
 
-    public ArrayList<MovieModel> searchMoviesByParameter (int warehouse, String searchParameter, String orderParameter){
+    public ArrayList<MovieModel> searchMoviesByName (int warehouseId, String searchParameter){
         //Implementamos SQL variable binding para evitar SQL injection
         String query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
                         "FROM product prod JOIN product_order prod_or\n" +
@@ -76,11 +77,11 @@ public class MovieDao {
                         "  AND wrh.warehouse_id = ? \n" +
                         "  AND UPPER(prod.product_name) like UPPER('%' || ? || '%')\n" +
                         "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name\n" +
-                        "ORDER BY "+orderParameter+";";
+                        "ORDER BY product_name;";
 
         ArrayList<MovieModel> movies = null;
         try{
-            movies = (ArrayList<MovieModel>) jdbcTemplate.query(query, new Object[]{warehouse, searchParameter}, new RowMapper<MovieModel>(){
+            movies = (ArrayList<MovieModel>) jdbcTemplate.query(query, new Object[]{warehouseId, searchParameter}, new RowMapper<MovieModel>(){
                 @Override
                 public MovieModel mapRow(ResultSet resultSet, int i) throws SQLException {
                     return new MovieModel(resultSet.getInt(1),
@@ -99,45 +100,102 @@ public class MovieDao {
         return movies;
     }
 
-    public ArrayList<MovieModel> orderMoviesByParameter (String warehouse, String parameter){
+    public ArrayList<MovieModel> searchAndSortMovies (int warehouseId, String searchParameter, String sortParameter){
         //Implementamos SQL variable binding para evitar SQL injection
         String query = null;
-        System.out.println(parameter);
-        if("qtty_received".equals(parameter)){
+        if ("qtty_received".equals(sortParameter)){
             query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
                     "FROM product prod JOIN product_order prod_or\n" +
-                    "on prod.product_id = prod_or.product_id\n" +
-                    "JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
-                    "JOIN provider prov on prov.provider_id = ord.provider_id\n" +
-                    "JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
+                    "                       on prod.product_id = prod_or.product_id\n" +
+                    "                  JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
+                    "                  JOIN provider prov on prov.provider_id = ord.provider_id\n" +
+                    "                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
                     "WHERE prod.status = 1\n" +
-                    "AND prod_or.status = 1\n" +
-                    "AND ord.status = 1\n" +
-                    "AND prov.status = 1\n" +
-                    "AND wrh.status = 1\n" +
-                    "AND wrh.warehouse_name = ?\n" +
+                    "  AND prod_or.status = 1\n" +
+                    "  AND ord.status = 1\n" +
+                    "  AND prov.status = 1\n" +
+                    "  AND wrh.status = 1\n" +
+                    "  AND wrh.warehouse_id = ? \n" +
+                    "  AND UPPER(prod.product_name) like UPPER('%' || ? || '%')\n" +
                     "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name\n" +
-                    "ORDER BY SUM("+parameter+") ASC; ";
+                    "ORDER BY SUM("+sortParameter+") ASC; ";
         } else {
             query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
                     "FROM product prod JOIN product_order prod_or\n" +
-                    "on prod.product_id = prod_or.product_id\n" +
-                    "JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
-                    "JOIN provider prov on prov.provider_id = ord.provider_id\n" +
-                    "JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
+                    "                       on prod.product_id = prod_or.product_id\n" +
+                    "                  JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
+                    "                  JOIN provider prov on prov.provider_id = ord.provider_id\n" +
+                    "                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
                     "WHERE prod.status = 1\n" +
-                    "AND prod_or.status = 1\n" +
-                    "AND ord.status = 1\n" +
-                    "AND prov.status = 1\n" +
-                    "AND wrh.status = 1\n" +
-                    "AND wrh.warehouse_name = ?\n" +
+                    "  AND prod_or.status = 1\n" +
+                    "  AND ord.status = 1\n" +
+                    "  AND prov.status = 1\n" +
+                    "  AND wrh.status = 1\n" +
+                    "  AND wrh.warehouse_id = ? \n" +
+                    "  AND UPPER(prod.product_name) like UPPER('%' || ? || '%')\n" +
                     "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name\n" +
-                    "ORDER BY "+parameter+" ASC; ";
+                    "ORDER BY "+sortParameter+" ASC; ";
         }
 
         ArrayList<MovieModel> movies = null;
         try{
-            movies = (ArrayList<MovieModel>) jdbcTemplate.query(query, new Object[]{warehouse}, new RowMapper<MovieModel>(){
+            movies = (ArrayList<MovieModel>) jdbcTemplate.query(query, new Object[]{warehouseId, searchParameter}, new RowMapper<MovieModel>(){
+                @Override
+                public MovieModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                    return new MovieModel(resultSet.getInt(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getDate(5),
+                            resultSet.getString(6),
+                            resultSet.getInt(7));
+                }
+            });
+
+        }catch (Exception e){
+            throw new RuntimeException();
+        }
+        return movies;
+    }
+
+    public ArrayList<MovieModel> sortMoviesByParameter (int warehouseId, String sortParameter){
+        //Implementamos SQL variable binding para evitar SQL injection
+        String query = null;
+        if("qtty_received".equals(sortParameter)){
+            query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
+                    "FROM product prod JOIN product_order prod_or\n" +
+                    "                       on prod.product_id = prod_or.product_id\n" +
+                    "                  JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
+                    "                  JOIN provider prov on prov.provider_id = ord.provider_id\n" +
+                    "                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
+                    "WHERE prod.status = 1\n" +
+                    "  AND prod_or.status = 1\n" +
+                    "  AND ord.status = 1\n" +
+                    "  AND prov.status = 1\n" +
+                    "  AND wrh.status = 1\n" +
+                    "  AND wrh.warehouse_id = ? \n" +
+                    "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name\n" +
+                    "ORDER BY SUM("+sortParameter+") ASC; ";
+        } else {
+            query = "SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)\n" +
+                    "FROM product prod JOIN product_order prod_or\n" +
+                    "                       on prod.product_id = prod_or.product_id\n" +
+                    "                  JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
+                    "                  JOIN provider prov on prov.provider_id = ord.provider_id\n" +
+                    "                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
+                    "WHERE prod.status = 1\n" +
+                    "  AND prod_or.status = 1\n" +
+                    "  AND ord.status = 1\n" +
+                    "  AND prov.status = 1\n" +
+                    "  AND wrh.status = 1\n" +
+                    "  AND wrh.warehouse_id = ? \n" +
+                    "GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name\n" +
+                    "ORDER BY "+sortParameter+" ASC; ";
+        }
+
+        ArrayList<MovieModel> movies = null;
+        try{
+            movies = (ArrayList<MovieModel>) jdbcTemplate.query(query, new Object[]{warehouseId}, new RowMapper<MovieModel>(){
                 @Override
                 public MovieModel mapRow(ResultSet resultSet, int i) throws SQLException {
                     return new MovieModel(resultSet.getInt(1),

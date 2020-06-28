@@ -1,7 +1,7 @@
-## Lista de películas de determinado almacén
+## Lista de todas las películas de un almacén
 
 POST http://localhost:8008/api/v1/movies
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNTkwMzl9.N4LuyAwkvbjqC9-nIBH2FQVkzm_6O2oSWGUoy_IU7r0
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNjMwODF9.x-i2GWn4thEnauRDXjJgecT7RkbMmXwL_ys84FHTjsw
 Content-Type: application/json
 Accept: application/json
 
@@ -9,28 +9,42 @@ Accept: application/json
   "warehouseId": 1
 }
 
-### Buscando
+### Buscar películas sólo por su nombre en la barra buscadora
 
-GET http://localhost:8008/api/v1/movies/search
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMjI3Njl9._DO3sScYz1WuEZbY0EPtaQjeLymhMkuq02qCrNPKzXw
+POST http://localhost:8008/api/v1/movies/search
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNjMwODF9.x-i2GWn4thEnauRDXjJgecT7RkbMmXwL_ys84FHTjsw
 Content-Type: application/json
 Accept: application/json
 
 {
-  "warehouse": "La Paz",
-  "parameter": "lado"
+  "warehouseId": "1",
+  "searchParameter": "B"
 }
 
-###
+### Buscar las películas con un criterio y ordenarlas
 
-GET http://localhost:8008/api/v1/movies/sort
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMyMjI3OTZ9.8SV2zwQzQV_s__BrsKQ2kcFh1T5sb8OcCG1zBs8BjAU
+POST http://localhost:8008/api/v1/movies/search/sort
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNjMyMjZ9.qfGJCgJxN-BukbCrJhdqtvyzkpudueGGDl5CsI8GdJc
 Content-Type: application/json
 Accept: application/json
 
 {
-  "warehouse": "La Paz",
-  "parameter": "qtty_received"
+  "warehouseId": "1",
+  "searchParameter": "Al",
+  "sortParameter": "product_code"
+
+}
+
+### Ordenar la lista de películas
+
+POST http://localhost:8008/api/v1/movies/sort
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNjMyMjZ9.qfGJCgJxN-BukbCrJhdqtvyzkpudueGGDl5CsI8GdJc
+Content-Type: application/json
+Accept: application/json
+
+{
+  "warehouseId": "1",
+  "sortParameter": "product_code"
 }
 
 ###

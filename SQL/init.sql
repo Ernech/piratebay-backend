@@ -284,8 +284,8 @@ WHERE prod.status = 1
   AND prov.status = 1
   AND wrh.status = 1
   AND wrh.warehouse_id = '1'
-GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name ;
-
+GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name
+ORDER BY prod.product_name;
 
 -- Query para buscar una película por su nombre
 SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)
@@ -300,25 +300,29 @@ WHERE prod.status = 1
   AND prov.status = 1
   AND wrh.status = 1
   AND wrh.warehouse_id = '1'
-  AND prod.product_name like '%mía%'
+  AND prod.product_name like '%A%'
 GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name
-ORDER BY product_code;
+ORDER BY product_name;
 
 -- Query para ordenar la lista de películas con un parámetro
 SELECT prod.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name, sum(prod_or.qtty_received)
 FROM product prod JOIN product_order prod_or
-on prod.product_id = prod_or.product_id
-JOIN "order" ord on ord.order_id = prod_or.order_id
-JOIN provider prov on prov.provider_id = ord.provider_id
-JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
+                       on prod.product_id = prod_or.product_id
+                  JOIN "order" ord on ord.order_id = prod_or.order_id
+                  JOIN provider prov on prov.provider_id = ord.provider_id
+                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id
 WHERE prod.status = 1
-AND prod_or.status = 1
-AND ord.status = 1
-AND prov.status = 1
-AND wrh.status = 1
-AND wrh.warehouse_name = 'La Paz'
+  AND prod_or.status = 1
+  AND ord.status = 1
+  AND prov.status = 1
+  AND wrh.status = 1
+  AND wrh.warehouse_id = '1'
 GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name
-ORDER BY SUM(prod_or.qtty_received) ASC;
+ORDER BY prod.product_code ASC;
+
+
+
+
 
 -- Query para obtener la información general del kardex
 SELECT prod.product_code, prod.product_name, prod.format, wrh.warehouse_address, prov.provider_name

@@ -4,15 +4,13 @@ public class SearchParameterModel {
 
     private Integer warehouseId;
     private String searchParameter;
-    private String orderParameter;
 
     public SearchParameterModel() {
     }
 
-    public SearchParameterModel(Integer warehouseId, String searchParameter, String orderParameter) {
+    public SearchParameterModel(Integer warehouseId, String searchParameter) {
         this.warehouseId = warehouseId;
         this.searchParameter = searchParameter;
-        this.orderParameter = orderParameter;
     }
 
     public Integer getWarehouseId() {
@@ -23,28 +21,19 @@ public class SearchParameterModel {
         this.warehouseId = warehouseId;
     }
 
+    @Override
+    public String toString() {
+        return "SearchParameterModel{" +
+                "warehouseId=" + warehouseId +
+                ", searchParameter='" + searchParameter + '\'' +
+                '}';
+    }
+
     public String getSearchParameter() {
         return searchParameter;
     }
 
     public void setSearchParameter(String searchParameter) {
         this.searchParameter = searchParameter;
-    }
-
-    public String getOrderParameter() {
-        return orderParameter;
-    }
-
-    public void setOrderParameter(String orderParameter) {
-        this.orderParameter = orderParameter;
-    }
-
-    @Override
-    public String toString() {
-        return "SearchParameterModel{" +
-                "warehouseId=" + warehouseId +
-                ", searchParameter='" + searchParameter + '\'' +
-                ", orderParameter='" + orderParameter + '\'' +
-                '}';
     }
 }

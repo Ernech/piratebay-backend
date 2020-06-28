@@ -22,11 +22,16 @@ public class MovieBl {
         return this.movieDao.selectMoviesFromWarehouse(warehouseId);
     }
 
-    public ArrayList<MovieModel> searchMoviesByParameter(Integer warehouseId, String searchParameter, String orderParameter){
-        return this.movieDao.searchMoviesByParameter(warehouseId, searchParameter, orderParameter);
+    public ArrayList<MovieModel> searchMoviesByName(Integer warehouseId, String searchParameter){
+        return this.movieDao.searchMoviesByName(warehouseId, searchParameter);
     }
 
-    public ArrayList<MovieModel> orderMoviesByParameter(String warehouse, String parameter){
-        return this.movieDao.orderMoviesByParameter(warehouse, parameter);
+    public ArrayList<MovieModel> searchAndSortMovies(Integer warehouseId, String searchParameter, String sortParameter){
+        return this.movieDao.searchAndSortMovies(warehouseId, searchParameter, sortParameter);
     }
+
+    public ArrayList<MovieModel> sortMoviesByParameter(Integer warehouseId, String sortParameter){
+        return this.movieDao.sortMoviesByParameter(warehouseId, sortParameter);
+    }
+
 }

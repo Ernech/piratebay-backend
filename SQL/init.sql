@@ -284,7 +284,7 @@ WHERE prod.status = 1
   AND ord.status = 1
   AND prov.status = 1
   AND wrh.status = 1
-  AND wrh.warehouse_id = '1'
+  AND wrh.warehouse_name = 'La Paz'
 GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name ;
 
 -- Query para buscar una película por su nombre
@@ -396,5 +396,5 @@ GROUP BY ord.order_id, prov.provider_name, ord.date_requested, ord.receipt, ord.
          prod_or.provider_product_id, prod_or.provider_product_id, prod.product_id,
          prod.product_name, prod_or.unit_price, prod_or.qtty_requested, prod_or.qtty_commit;
 
-UPDATE "order" SET date_received = '2020-06-25 15:30:00.000000' where order_id = 6;
-UPDATE product_order SET qtty_received = 30 where provider_product_id = 8;
+UPDATE "order" SET date_received =null where order_id = 6;
+UPDATE product_order SET qtty_received = null where provider_product_id = 8;

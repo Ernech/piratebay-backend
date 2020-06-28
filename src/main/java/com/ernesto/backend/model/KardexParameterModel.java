@@ -2,23 +2,23 @@ package com.ernesto.backend.model;
 
 public class KardexParameterModel {
 
-    private String warehouse;
+    private Integer warehouseId;
     private Integer parameter;
 
     public KardexParameterModel() {
     }
 
-    public KardexParameterModel(String warehouse, Integer parameter) {
-        this.warehouse = warehouse;
+    public KardexParameterModel(int warehouseId, Integer parameter) {
+        this.warehouseId = warehouseId;
         this.parameter = parameter;
     }
 
-    public String getWarehouse() {
-        return warehouse;
+    public Integer getWarehouse() {
+        return warehouseId;
     }
 
-    public void setWarehouse(String warehouse) {
-        this.warehouse = warehouse;
+    public void setWarehouse(Integer warehouseId) {
+        this.warehouseId = warehouseId;
     }
 
     public Integer getParameter() {
@@ -32,7 +32,7 @@ public class KardexParameterModel {
     @Override
     public String toString() {
         return "KardexParameterModel{" +
-                "warehouse='" + warehouse + '\'' +
+                "warehouse='" + warehouseId + '\'' +
                 ", parameter=" + parameter +
                 '}';
     }

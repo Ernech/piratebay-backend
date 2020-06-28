@@ -31,7 +31,6 @@ public class WarehouseController {
     public WarehouseController(WarehouseBI warehouseBI) { this.warehouseBI = warehouseBI; }
 
     @RequestMapping(
-            value = "get",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
 

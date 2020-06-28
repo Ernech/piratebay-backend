@@ -351,7 +351,7 @@ WHERE prod.status = 1
   AND prov.status = 1
   AND wrh.status = 1
   AND wrh.warehouse_name = 'La Paz'
-  AND prod.product_name = 'Africa mía'
+  AND prod.product_name = 'A la hora señalada'
 GROUP BY ord.date_received, ord.concept, ord.receipt, prod_or.unit_price, prod_or.qtty_received
 ORDER BY ord.date_received;
 

@@ -53,7 +53,7 @@ public class KardexController {
     }
 
     @RequestMapping(
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 

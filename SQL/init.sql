@@ -136,6 +136,96 @@ VALUES
    'Blue-Ray', 1, 1, 'root', '127.0.0.1', now()
 );
 
+-- Agregando más películas
+
+INSERT INTO product
+( product_id, product_code, cat_product_type, product_name, product_description,
+  format, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_product_id_seq') , '105', 'MOVIE', 'Historia de un matrimonio', 'Un director de teatro y su mujer, actriz, luchan por superar un divorcio que les lleva al extremo tanto en lo personal como en lo creativo.',
+   'DVD', 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product
+( product_id, product_code, cat_product_type, product_name, product_description,
+  format, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_product_id_seq') , '106', 'MOVIE', 'Historia de un matrimonio', 'Un director de teatro y su mujer, actriz, luchan por superar un divorcio que les lleva al extremo tanto en lo personal como en lo creativo.',
+   'Blue-Ray', 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product
+( product_id, product_code, cat_product_type, product_name, product_description,
+  format, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_product_id_seq') , '107', 'MOVIE', 'Parásitos', 'Tanto Gi Taek como su familia están sin trabajo. Cuando su hijo mayor, Gi Woo, empieza a impartir clases particulares en la adinerada casa de los Park, las dos familias, que tienen mucho en común pese a pertenecer a dos mundos totalmente distintos, entablan una relación de resultados imprevisibles.',
+   'Blue-Ray', 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product
+( product_id, product_code, cat_product_type, product_name, product_description,
+  format, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_product_id_seq') , '108', 'MOVIE', 'Forrest Gump', 'La simpleza e inocencia de un sureño lo impulsan a través de hechos importantes de la historia moderna de EE.UU.',
+   'DVD', 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product
+( product_id, product_code, cat_product_type, product_name, product_description,
+  format, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_product_id_seq') , '109', 'MOVIE', 'La la land', 'Sebastian, un pianista de jazz, y Mia, una aspirante a actriz, se enamoran locamente; pero la ambición desmedida que tienen por triunfar en sus respectivas carreras, en una ciudad como Los Ángeles, repleta de competencia y carente de piedad, pone en peligro su amor.',
+   'Blue-Ray', 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product
+( product_id, product_code, cat_product_type, product_name, product_description,
+  format, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_product_id_seq') , '110', 'MOVIE', 'La isla siniestra', 'Un alguacil de los años cincuenta persigue a una asesina que escapó de un sanatorio en una isla remota, y hay pistas de hechos macabros cometidos en su interior.',
+   'DVD', 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product
+( product_id, product_code, cat_product_type, product_name, product_description,
+  format, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_product_id_seq') , '111', 'MOVIE', 'Hambre de poder', 'La historia de cómo, en la década de 1950, un vendedor llamado Ray Croc, sorprendido por la velocidad y eficiencia con la que los hermanos Richard y Maurice McDonald dirigían su hamburguesería en el sur de California, se adueñó del negocio y lo convirtió en la cadena de comida rápida más conocida del mundo.',
+   'Blue-Ray', 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product
+( product_id, product_code, cat_product_type, product_name, product_description,
+  format, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_product_id_seq') , '112', 'MOVIE', 'Amar rezar comer', 'Liz Gilbert pensó que tenía todo lo que ella quería en la vida: una casa, un marido y una carrera exitosa. Pero un día descubre que ya no quiere más esa vida, por lo que decide poner fin a su matrimonio y emprender un viaje de autodescubrimiento que la lleva a Italia, India e Indonesia.',
+   'Blue-Ray', 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product
+( product_id, product_code, cat_product_type, product_name, product_description,
+  format, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_product_id_seq') , '113', 'MOVIE', 'Los siete pecados capitales', 'Somerset es un solitario y veterano detective a punto de retirarse que se encuentra con Mills, un joven impulsivo. Ambos investigan un particular asesinato. Es este el primero de una serie de crímenes que aluden los siete pecados capitales.',
+   'Blue-Ray', 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product
+( product_id, product_code, cat_product_type, product_name, product_description,
+  format, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_product_id_seq') , '114', 'MOVIE', 'Una esposa de mentira', 'El cirujano Danny decide contratar a su ayudante Katherine, una madre soltera con hijos, para que finjan ser su familia. Su intención es demostrarle a Palmer que su amor por ella es tan grande que está a punto de divorciarse de su mujer.',
+   'DVD', 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product
+( product_id, product_code, cat_product_type, product_name, product_description,
+  format, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_product_id_seq') , '115', 'MOVIE', 'La gran apuesta', 'Cuatro sagaces inversores intentan sacar provecho de la crisis económica que comenzó a padecer el mundo en el año 2008. Pero sus inversiones de riesgo les acaban conduciendo al lado más tenebroso de la economía, donde nada ni nadie es lo que parece ser.',
+   'DVD', 1, 1, 'root', '127.0.0.1', now()
+);
+
 -- Insertando a los proveedores
 
 INSERT INTO provider
@@ -246,6 +336,105 @@ VALUES
    1, 1, 'root', '127.0.0.1', now(), 'F-6', '2020-07-02 12:30:00', 'Compra'
 );
 
+-- Nuevas órdenes para el resto de los almacenes
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 1, 2, 2, '2020-04-13 10:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-1', '2020-04-20 12:30:00', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 2, 2, 2, '2020-05-12 11:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-2', '2020-05-15 12:30:00', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 1, 2, 2, '2020-06-21 11:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-3', '2020-06-26 12:30:00', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 2, 3, 2, '2020-04-03 11:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-1', '2020-04-07 12:30:00', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 2, 3, 2, '2020-05-21 11:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-2', '2020-05-28 12:30:00', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 1, 3, 2, '2020-06-01 11:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-3', '2020-06-05 12:30:00', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 1, 4, 2, '2020-04-26 11:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-1', '2020-04-30 12:30:00', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 1, 4, 2, '2020-05-12 11:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-2', '2020-05-17 12:30:00', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 2, 4, 2, '2020-06-19 11:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-3', '2020-06-23 12:30:00', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 2, 5, 2, '2020-04-05 11:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-1', '2020-04-10 12:30:00', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 2, 5, 2, '2020-05-22 11:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-2', '2020-05-26 12:30:00', 'Compra'
+);
+
+INSERT INTO "order"
+( order_id, provider_id, warehouse_id, order_user_id, date_requested,
+  status, tx_id, tx_username, tx_host, tx_date, receipt, date_received, concept)
+VALUES
+(  nextval('order_order_id_seq'), 1, 5, 2, '2020-06-21 11:30:00',
+   1, 1, 'root', '127.0.0.1', now(), 'F-3', '2020-06-29 12:30:00', 'Compra'
+);
+
+
 -- Agregando datos a la tabla product-order
 
 INSERT INTO product_order
@@ -290,27 +479,172 @@ VALUES
 
 INSERT INTO product_order
 ( provider_product_id, order_id, product_id, unit_price, qtty_requested,
-  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
 VALUES
 (  nextval('product_order_provider_product_id_seq'), 9, 1, 10, 50,
-   50, 1, 1, 'root', '127.0.0.1', now()
+   50, 50, 1, 1, 'root', '127.0.0.1', now()
 );
 
 INSERT INTO product_order
 ( provider_product_id, order_id, product_id, unit_price, qtty_requested,
-  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
 VALUES
 (  nextval('product_order_provider_product_id_seq'), 10, 1, 8, 30,
-   25, 1, 1, 'root', '127.0.0.1', now()
+   25, 25, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 11, 1, 9, 40,
+   40, 40, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 12, 5, 10, 60,
+   50, 50, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 12, 6, 12, 40,
+   35, 35, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 12, 7, 10, 30,
+   30, 25, 1, 1, 'root', '127.0.0.1', now()
 );
 
 INSERT INTO product_order
 ( provider_product_id, order_id, product_id, unit_price, qtty_requested,
   qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
 VALUES
-(  nextval('product_order_provider_product_id_seq'), 11, 1, 9, 40,
+(  nextval('product_order_provider_product_id_seq'), 13, 8, 10, 40,
    40, 1, 1, 'root', '127.0.0.1', now()
 );
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 14, 9, 8, 50,
+   50, 45, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 15, 10, 8, 40,
+   38, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 15, 11, 10, 45,
+   40, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 16, 12, 10, 60,
+   55, 50, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 17, 13, 8, 60,
+   60, 60, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 18, 14, 8, 40,
+   40, 35, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 18, 15, 10, 50,
+   45, 45, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 19, 1, 10, 70,
+   65, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 19, 2, 10, 30,
+   30, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 20, 3, 10, 40,
+   35, 35, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 21, 4, 8, 65,
+   60, 60, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 22, 5, 10, 40,
+   40, 40, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 23, 6, 10, 55,
+   45, 45, 1, 1, 'root', '127.0.0.1', now()
+);
+
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, qtty_received, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 23, 7, 8, 50,
+   50, 50, 1, 1, 'root', '127.0.0.1', now()
+);
+
 
 -- Query para devolver todos los almacenes
 SELECT wrh.warehouse_id, wrh.warehouse_name
@@ -330,7 +664,7 @@ WHERE prod.status = 1
   AND ord.status = 1
   AND prov.status = 1
   AND wrh.status = 1
-  AND wrh.warehouse_id = '1'
+  AND wrh.warehouse_id = '5'
 GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name
 ORDER BY prod.product_name;
 

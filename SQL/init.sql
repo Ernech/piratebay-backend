@@ -407,7 +407,7 @@ ORDER BY ord.date_received;
 -- Query para obtener las órdenes no recibidas
 
 SELECT prod_or.provider_product_id, ord.order_id, prov.provider_name, ord.date_requested, ord.date_received, ord.receipt,
-       prod_or.qtty_requested, prod_or.qtty_commit
+       prod_or.qtty_requested, prod_or.qtty_commit,prod_or.qtty_received
 FROM product prod JOIN product_order prod_or
                        on prod.product_id = prod_or.product_id
                   JOIN "order" ord on ord.order_id = prod_or.order_id
@@ -419,7 +419,7 @@ WHERE prod.status = 1
   AND ord.status = 1
   AND prov.status = 1
   AND wrh.status = 1
-  AND prod_or.qtty_received is Null
+  AND prod_or.qtty_received is Null OR prod_or.qtty_received<prod_or.qtty_commit
   AND wrh.warehouse_id = '1'
   AND prod.product_id = '1'
 GROUP BY prod_or.provider_product_id, ord.order_id, prov.provider_name, ord.date_requested,
@@ -427,3 +427,7 @@ GROUP BY prod_or.provider_product_id, ord.order_id, prov.provider_name, ord.date
 
 -- Hacer un update de la cantidad recibida
 UPDATE product_order SET qtty_received = null where provider_product_id = 8;
+
+select * from "order";
+
+select * from "product_order" where qtty_received is null;

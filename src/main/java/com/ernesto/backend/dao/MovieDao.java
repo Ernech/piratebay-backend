@@ -209,6 +209,7 @@ public class MovieDao {
             });
 
         }catch (Exception e){
+            System.out.println("error"+ e);
             throw new RuntimeException();
         }
         return movies;

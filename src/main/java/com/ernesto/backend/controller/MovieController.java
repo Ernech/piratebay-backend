@@ -31,11 +31,12 @@ public class MovieController {
 
     // Método para obtener todas las películas de un almacén
     @RequestMapping(
-            method = RequestMethod.POST,
-            consumes =MediaType.APPLICATION_JSON_VALUE,
+            path = "/{warehouseId}",
+            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<ArrayList<MovieModel>> selectMoviesFromWarehouse(@RequestHeader("Authorization") String authorization, @RequestBody WarehouseModel warehouseModel){
+    public ResponseEntity<ArrayList<MovieModel>> selectMoviesFromWarehouse(@RequestHeader("Authorization") String authorization,
+                                                                           @PathVariable("warehouseId") Integer warehouseId){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -47,7 +48,7 @@ public class MovieController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("PirateBay").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.movieBl.selectMoviesFromWarehouse(warehouseModel.getWarehouseId()), HttpStatus.OK);
+        return new ResponseEntity<>(this.movieBl.selectMoviesFromWarehouse(warehouseId), HttpStatus.OK);
     }
 
     // Método para buscar películas por su nombre UNICAMENTE EN LA BARRA DE BÚSQUEDA

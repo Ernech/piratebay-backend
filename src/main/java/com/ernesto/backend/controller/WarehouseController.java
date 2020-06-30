@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/api/v1/warehouse")
+@RequestMapping("/api/v1/warehouses")
 @CrossOrigin(origins = "*")
 public class WarehouseController {
 

@@ -1,12 +1,12 @@
 ## Lista de todas las películas de un almacén
 
-POST http://localhost:8008/api/v1/movies
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNjMwODF9.x-i2GWn4thEnauRDXjJgecT7RkbMmXwL_ys84FHTjsw
+GET http://localhost:8008/api/v1/movies/2
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTM1NDg1NzN9.ObOXIoM3LDDY3L45NWE8mI3aeSsmuQqiBLaix4G9H5Y
 Content-Type: application/json
 Accept: application/json
 
 {
-  "warehouseId": 1
+
 }
 
 ### Buscar películas sólo por su nombre en la barra buscadora

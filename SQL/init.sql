@@ -772,6 +772,8 @@ GROUP BY prod_or.provider_product_id, ord.order_id, prov.provider_name, ord.date
 
 UPDATE product_order SET qtty_received = null where provider_product_id = 8;
 
+
+UPDATE product_order SET qtty_received = 0 where provider_product_id = 1;
 -- Query para probar si el campo de qtty received esta con 0 por defecto
 SELECT *
 FROM information_schema.columns

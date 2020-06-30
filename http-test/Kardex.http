@@ -36,7 +36,7 @@ Accept: application/json
 
 ###
 
-POST http://localhost:8008/api/v1/kardex/update
+PUT http://localhost:8008/api/v1/kardex/update
 Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTM0ODA3NjR9.aoHsQ8ATTakyZ20QPHlvXAgUcEaAQsbnNXEB6ZsvsPw
 Content-Type: application/json
 Accept: application/json

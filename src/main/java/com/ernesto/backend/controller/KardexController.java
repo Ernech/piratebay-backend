@@ -74,7 +74,7 @@ public class KardexController {
 
     @RequestMapping(
             value = "update",
-            method = RequestMethod.POST,
+            method = RequestMethod.PUT,
             produces =  MediaType.APPLICATION_JSON_VALUE,
             consumes =MediaType.APPLICATION_JSON_VALUE)
 

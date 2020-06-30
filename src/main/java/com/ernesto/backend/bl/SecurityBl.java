@@ -53,8 +53,8 @@ public class SecurityBl {
        // System.out.println("Password "+ sha256hex);
         Integer userId=userDao.findUserIdByUsernameAndPassword(username,sha256hex);
         if(userId!=null){
-            result.put("authentication",generateJwt(userId,2,"AUTHN",userDao.findAllFeatureCodeByUserId(userId)));
-            result.put("refresh", generateJwt(userId, 4, "REFRESH",null));
+            result.put("authentication",generateJwt(userId,1,"AUTHN",userDao.findAllFeatureCodeByUserId(userId)));
+            result.put("refresh", generateJwt(userId, 2, "REFRESH",null));
             return result;
         }else{
             return null;
@@ -77,8 +77,8 @@ public class SecurityBl {
             verifier.verify(tokenJwt);
         Map<String,String> result = new HashMap<>();
         Integer userIdAsInt = Integer.parseInt(idUsuario);
-        result.put("authentication",generateJwt(Integer.parseInt(idUsuario),2,"AUTHN",userDao.findAllFeatureCodeByUserId(userIdAsInt)));
-        result.put("refresh",generateJwt(Integer.parseInt(idUsuario),4,"REFRESH",null));
+        result.put("authentication",generateJwt(Integer.parseInt(idUsuario),1,"AUTHN",userDao.findAllFeatureCodeByUserId(userIdAsInt)));
+        result.put("refresh",generateJwt(Integer.parseInt(idUsuario),2,"REFRESH",null));
         return result;
     }
     private String generateJwt(int userId, int minutes, String type, ArrayList<String> features){

@@ -81,12 +81,20 @@ public class MovieController {
     // Buscar una lista de películas y ordenarlas
 
     @RequestMapping(
-            value = "search/sort",
-            method = RequestMethod.POST,
+            path="/{warehouseId}/search/{searchParameter}/sort/{sortParameter}",
+            method = RequestMethod.GET,
             consumes =MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<ArrayList<MovieModel>> searchAndSortMovies (@RequestHeader("Authorization") String authorization, @RequestBody SearchSortParameterModel searchSortParameterModel){
+    public ResponseEntity<ArrayList<MovieModel>> searchAndSortMovies (@RequestHeader("Authorization") String authorization,
+                                                                      @PathVariable("warehouseId") Integer warehouseId,
+                                                                      @PathVariable("searchParameter") String searchParameter,
+                                                                      @PathVariable("sortParameter") String sortParameter){
+
+        SearchSortParameterModel searchSortParameterModel = new SearchSortParameterModel();
+        searchSortParameterModel.setWarehouseId(warehouseId);
+        searchSortParameterModel.setSearchParameter(searchParameter);
+        searchSortParameterModel.setSortParameter(sortParameter);
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -104,12 +112,18 @@ public class MovieController {
     // Ordenar por un criterio la lista de películas
 
     @RequestMapping(
-            value = "sort",
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
+            path="/{warehouseId}/sort/{sortParameter}",
+            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<ArrayList<MovieModel>> sortMoviesByParameter (@RequestHeader("Authorization") String authorization, @RequestBody SortParameterModel sortParameterModel){
+    public ResponseEntity<ArrayList<MovieModel>> sortMoviesByParameter (@RequestHeader("Authorization") String authorization,
+                                                                        @PathVariable("warehouseId") Integer warehouseId,
+                                                                        @PathVariable("sortParameter") String sortParameter){
+
+        SortParameterModel sortParameterModel = new SortParameterModel();
+        sortParameterModel.setWarehouseId(warehouseId);
+        sortParameterModel.setSortParameter(sortParameter);
+
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);

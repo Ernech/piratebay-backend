@@ -21,27 +21,22 @@ Content-Type: application/json
 
 ### Buscar las películas con un criterio y ordenarlas
 
-POST http://localhost:8008/api/v1/movies/search/sort
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNjMyMjZ9.qfGJCgJxN-BukbCrJhdqtvyzkpudueGGDl5CsI8GdJc
+GET http://localhost:8008/api/v1/movies/1/search/Al/sort/product_code
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTM1NTA2MDR9.22xzi9h82fPhd3BWyYyuzl1YgB-QCPaOLwqXW64zog4
 Content-Type: application/json
 
 {
-  "warehouseId": "1",
-  "searchParameter": "Al",
-  "sortParameter": "product_code"
 
 }
 
 ### Ordenar la lista de películas
 
-POST http://localhost:8008/api/v1/movies/sort
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNjMyMjZ9.qfGJCgJxN-BukbCrJhdqtvyzkpudueGGDl5CsI8GdJc
+GET http://localhost:8008/api/v1/movies/1/sort/product_name
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTM1NTAyNzl9.OAaIeFhQ8O4dPfJBHJUOhcnPO94v8eJEsU9xLqmiWjg
 Content-Type: application/json
-Accept: application/json
 
 {
-  "warehouseId": "1",
-  "sortParameter": "product_code"
+
 }
 
 ###

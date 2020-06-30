@@ -32,12 +32,18 @@ public class OrderController {
     public OrderController(OrderBl orderBl) { this.orderBl = orderBl; }
 
     @RequestMapping(
-            value = "not_received",
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
+            path = "/{warehouseId}/not_entry/{productId}",
+            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<ArrayList<OrderModel>> returnOrdersByMovie (@RequestHeader("Authorization") String authorization, @RequestBody OrderParameterModel orderParameterModel){
+    public ResponseEntity<ArrayList<OrderModel>> returnOrdersByMovie (@RequestHeader("Authorization") String authorization,
+                                                                      @PathVariable("warehouseId") Integer warehouseId,
+                                                                      @PathVariable("productId") Integer productId){
+
+        OrderParameterModel orderParameterModel = new OrderParameterModel();
+        orderParameterModel.setWarehouseId(warehouseId);
+        orderParameterModel.setProductId(productId);
+
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         System.out.println("TOKEN JWT: "+   tokenJwt);

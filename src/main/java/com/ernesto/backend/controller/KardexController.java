@@ -32,12 +32,17 @@ public class KardexController {
     public KardexController(KardexBl kardexBl) { this.kardexBl = kardexBl; }
 
     @RequestMapping(
-            value = "information",
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
+            path = "{warehouseId}/information/{productId}",
+            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<KardexInformationModel> returnKardexInformationByMovie (@RequestHeader("Authorization") String authorization, @RequestBody KardexParameterModel kardexParameterModel){
+    public ResponseEntity<KardexInformationModel> returnKardexInformationByMovie (@RequestHeader("Authorization") String authorization,
+                                                                                  @PathVariable("warehouseId") Integer warehouseId,
+                                                                                  @PathVariable("productId") Integer productId){
+
+        KardexParameterModel kardexParameterModel = new KardexParameterModel();
+        kardexParameterModel.setWarehouseId(warehouseId);
+        kardexParameterModel.setProductId(productId);
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -53,11 +58,18 @@ public class KardexController {
     }
 
     @RequestMapping(
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
+            path = "/{warehouseId}/{productId}",
+            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<ArrayList<KardexModel>> returnKardexByMovie (@RequestHeader("Authorization") String authorization, @RequestBody KardexParameterModel kardexParameterModel){
+    public ResponseEntity<ArrayList<KardexModel>> returnKardexByMovie (@RequestHeader("Authorization") String authorization,
+                                                                       @PathVariable("warehouseId") Integer warehouseId,
+                                                                       @PathVariable("productId") Integer productId){
+
+        KardexParameterModel kardexParameterModel = new KardexParameterModel();
+        kardexParameterModel.setWarehouseId(warehouseId);
+        kardexParameterModel.setProductId(productId);
+
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -78,7 +90,8 @@ public class KardexController {
             produces =  MediaType.APPLICATION_JSON_VALUE,
             consumes =MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity <Map<String,String>> updateQttyReceivedByMovie (@RequestHeader("Authorization") String authorization, @RequestBody UpdateQttyModel updateQttyModel){
+    public ResponseEntity <Map<String,String>> updateQttyReceivedByMovie (@RequestHeader("Authorization") String authorization,
+                                                                          @RequestBody UpdateQttyModel updateQttyModel){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);

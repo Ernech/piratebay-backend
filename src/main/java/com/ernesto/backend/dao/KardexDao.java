@@ -62,24 +62,24 @@ public class KardexDao {
     public ArrayList<KardexModel> returnKardexByMovie (int warehouseId, int productId) {
         //Implementamos SQL variable binding para evitar SQL injection
         String query = "SELECT ord.date_received, ord.concept, ord.receipt, prod_or.unit_price as ValorUnitario,\n" +
-                        "       prod_or.qtty_received as EntradaCantidad, prod_or.unit_price*prod_or.qtty_received as EntradaValor,\n" +
-                        "       SUM(prod_or.qtty_received) over (order by ord.date_received) as SaldoCantidad,\n" +
-                        "       SUM(prod_or.unit_price*prod_or.qtty_received) over (order by ord.date_received) as SaldoValor\n" +
-                        "FROM product prod JOIN product_order prod_or\n" +
-                        "                       on prod.product_id = prod_or.product_id\n" +
-                        "                  JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
-                        "                  JOIN provider prov on prov.provider_id = ord.provider_id\n" +
-                        "                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
-                        "WHERE prod.status = 1\n" +
-                        "  AND prod_or.status = 1\n" +
-                        "  AND ord.status = 1\n" +
-                        "  AND prov.status = 1\n" +
-                        "  AND wrh.status = 1\n" +
-                        "  AND wrh.warehouse_id = ? \n" +
-                        "  AND prod.product_id = ? \n" +
-                        "  AND prod_or.qtty_received is not Null \n" +
-                        "GROUP BY ord.date_received, ord.concept, ord.receipt, prod_or.unit_price, prod_or.qtty_received\n" +
-                        "ORDER BY ord.date_received;";
+                "       prod_or.qtty_received as EntradaCantidad, prod_or.unit_price*prod_or.qtty_received as EntradaValor,\n" +
+                "       SUM(prod_or.qtty_received) over (order by ord.date_received) as SaldoCantidad,\n" +
+                "       SUM(prod_or.unit_price*prod_or.qtty_received) over (order by ord.date_received) as SaldoValor\n" +
+                "FROM product prod JOIN product_order prod_or\n" +
+                "                       on prod.product_id = prod_or.product_id\n" +
+                "                  JOIN \"order\" ord on ord.order_id = prod_or.order_id\n" +
+                "                  JOIN provider prov on prov.provider_id = ord.provider_id\n" +
+                "                  JOIN warehouse wrh on wrh.warehouse_id = ord.warehouse_id\n" +
+                "WHERE prod.status = 1\n" +
+                "  AND prod_or.status = 1\n" +
+                "  AND ord.status = 1\n" +
+                "  AND prov.status = 1\n" +
+                "  AND wrh.status = 1\n" +
+                "  AND wrh.warehouse_id = ? \n" +
+                "  AND prod.product_id = ? \n" +
+                "  AND prod_or.qtty_received > 0\n" +
+                "GROUP BY ord.date_received, ord.concept, ord.receipt, prod_or.unit_price, prod_or.qtty_received\n" +
+                "ORDER BY ord.date_received;";
 
         ArrayList<KardexModel> kardex = null;
         try {

@@ -645,7 +645,16 @@ VALUES
    50, 50, 1, 1, 'root', '127.0.0.1', now()
 );
 
+INSERT INTO product_order
+( provider_product_id, order_id, product_id, unit_price, qtty_requested,
+  qtty_commit, status, tx_id, tx_username, tx_host, tx_date)
+VALUES
+(  nextval('product_order_provider_product_id_seq'), 23, 8, 10, 60,
+   50, 1, 1, 'root', '127.0.0.1', now()
+);
 
+
+-- QUERYS
 -- Query para devolver todos los almacenes
 SELECT wrh.warehouse_id, wrh.warehouse_name
 FROM warehouse wrh
@@ -664,7 +673,7 @@ WHERE prod.status = 1
   AND ord.status = 1
   AND prov.status = 1
   AND wrh.status = 1
-  AND wrh.warehouse_id = '5'
+  AND wrh.warehouse_id = '3'
 GROUP BY prod.product_id, prod_or.product_id, prod.product_code, prod.product_name, prod.format, prod.creation_date, prov.provider_name
 ORDER BY prod.product_name;
 
@@ -713,8 +722,8 @@ WHERE prod.status = 1
   AND ord.status = 1
   AND prov.status = 1
   AND wrh.status = 1
-  AND wrh.warehouse_id = '1'
-  AND prod.product_id = '1'
+  AND wrh.warehouse_id = '2'
+  AND prod.product_id = '5'
 GROUP BY prod.product_code, prod.product_name, prod.format, wrh.warehouse_address, prov.provider_name;
 
 -- Query para obtener el kardex
@@ -732,9 +741,9 @@ WHERE prod.status = 1
   AND ord.status = 1
   AND prov.status = 1
   AND wrh.status = 1
-  AND wrh.warehouse_id = '1'
-  AND prod.product_id = '1'
-  AND prod_or.qtty_received is not Null
+  AND wrh.warehouse_id = '3'
+  AND prod.product_id = '10'
+  AND prod_or.qtty_received > 0
 GROUP BY ord.date_received, ord.concept, ord.receipt, prod_or.unit_price, prod_or.qtty_received
 ORDER BY ord.date_received;
 
@@ -753,15 +762,21 @@ WHERE prod.status = 1
   AND ord.status = 1
   AND prov.status = 1
   AND wrh.status = 1
-  AND prod_or.qtty_received is Null OR prod_or.qtty_received<prod_or.qtty_commit
-  AND wrh.warehouse_id = '1'
-  AND prod.product_id = '1'
-GROUP BY prod_or.provider_product_id, ord.order_id, prov.provider_name, ord.date_requested,
-         ord.date_received, ord.receipt, prod_or.qtty_requested, prod_or.qtty_commit;
+  AND prod_or.qtty_received < prod_or.qtty_commit
+  AND wrh.warehouse_id = '3'
+  AND prod.product_id = '10'
+GROUP BY prod_or.provider_product_id, ord.order_id, prov.provider_name, ord.date_requested, ord.date_received, ord.receipt,
+         prod_or.qtty_requested, prod_or.qtty_commit,prod_or.qtty_received;
 
 -- Hacer un update de la cantidad recibida
+
 UPDATE product_order SET qtty_received = null where provider_product_id = 8;
 
-select * from "order";
+-- Query para probar si el campo de qtty received esta con 0 por defecto
+SELECT *
+FROM information_schema.columns
+WHERE table_name = 'product_order';
 
-select * from "product_order" where qtty_received is null;
+ALTER TABLE product_order ALTER COLUMN qtty_received SET DEFAULT 0;
+
+UPDATE "user" set password = '48536dd79e3e3258ca6874bd3b00b424bab3d1469130a0716b7259f560eb718a' where user_id = 1;

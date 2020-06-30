@@ -53,12 +53,17 @@ public class MovieController {
 
     // Método para buscar películas por su nombre UNICAMENTE EN LA BARRA DE BÚSQUEDA
     @RequestMapping(
-            value = "search",
-            method = RequestMethod.POST,
-            consumes =MediaType.APPLICATION_JSON_VALUE,
+            path = "{warehouseId}/search/{searchParameter}",
+            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<ArrayList<MovieModel>> searchMoviesByName (@RequestHeader("Authorization") String authorization, @RequestBody SearchParameterModel searchParameterModel){
+    public ResponseEntity<ArrayList<MovieModel>> searchMoviesByName (@RequestHeader("Authorization") String authorization,
+                                                                     @PathVariable("warehouseId") Integer warehouseId,
+                                                                     @PathVariable("searchParameter") String searchParameter){
+
+        SearchParameterModel searchParameterModel = new SearchParameterModel();
+        searchParameterModel.setWarehouseId(warehouseId);
+        searchParameterModel.setSearchParameter(searchParameter);
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);

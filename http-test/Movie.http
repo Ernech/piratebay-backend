@@ -11,14 +11,12 @@ Accept: application/json
 
 ### Buscar películas sólo por su nombre en la barra buscadora
 
-POST http://localhost:8008/api/v1/movies/search
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNjMwODF9.x-i2GWn4thEnauRDXjJgecT7RkbMmXwL_ys84FHTjsw
+GET http://localhost:8008/api/v1/movies/1/search/Al
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTM1NDk4MTZ9.ZUVFgVO4xlh3g9xpp-V97nzV4ThWNiUg2FAjtnu3AD0
 Content-Type: application/json
-Accept: application/json
 
 {
-  "warehouseId": "1",
-  "searchParameter": "B"
+
 }
 
 ### Buscar las películas con un criterio y ordenarlas
@@ -26,7 +24,6 @@ Accept: application/json
 POST http://localhost:8008/api/v1/movies/search/sort
 Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTMzNjMyMjZ9.qfGJCgJxN-BukbCrJhdqtvyzkpudueGGDl5CsI8GdJc
 Content-Type: application/json
-Accept: application/json
 
 {
   "warehouseId": "1",

@@ -21,19 +21,19 @@ public class SearchParameterModel {
         this.warehouseId = warehouseId;
     }
 
-    @Override
-    public String toString() {
-        return "SearchParameterModel{" +
-                "warehouseId=" + warehouseId +
-                ", searchParameter='" + searchParameter + '\'' +
-                '}';
-    }
-
     public String getSearchParameter() {
         return searchParameter;
     }
 
     public void setSearchParameter(String searchParameter) {
         this.searchParameter = searchParameter;
+    }
+
+    @Override
+    public String toString() {
+        return "SearchParameterModel{" +
+                "warehouseId=" + warehouseId +
+                ", searchParameter='" + searchParameter + '\'' +
+                '}';
     }
 }

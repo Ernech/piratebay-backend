@@ -41,7 +41,7 @@ public class SearchSortParameterModel {
 
     @Override
     public String toString() {
-        return "SearchParameterModel{" +
+        return "SearchSortParameterModel{" +
                 "warehouseId=" + warehouseId +
                 ", searchParameter='" + searchParameter + '\'' +
                 ", sortParameter='" + sortParameter + '\'' +

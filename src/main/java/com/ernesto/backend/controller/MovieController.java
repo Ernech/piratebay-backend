@@ -53,17 +53,14 @@ public class MovieController {
 
     // Método para buscar películas por su nombre UNICAMENTE EN LA BARRA DE BÚSQUEDA
     @RequestMapping(
-            path = "{warehouseId}/search/{searchParameter}",
-            method = RequestMethod.GET,
+            value="search",
+            method = RequestMethod.POST,
+            consumes =MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
     public ResponseEntity<ArrayList<MovieModel>> searchMoviesByName (@RequestHeader("Authorization") String authorization,
-                                                                     @PathVariable("warehouseId") Integer warehouseId,
-                                                                     @PathVariable("searchParameter") String searchParameter){
+                                                                     @RequestBody SearchParameterModel searchParameterModel){
 
-        SearchParameterModel searchParameterModel = new SearchParameterModel();
-        searchParameterModel.setWarehouseId(warehouseId);
-        searchParameterModel.setSearchParameter(searchParameter);
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -81,20 +78,14 @@ public class MovieController {
     // Buscar una lista de películas y ordenarlas
 
     @RequestMapping(
-            path="/{warehouseId}/search/{searchParameter}/sort/{sortParameter}",
-            method = RequestMethod.GET,
+            value="search/sort",
+            method = RequestMethod.POST,
             consumes =MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
     public ResponseEntity<ArrayList<MovieModel>> searchAndSortMovies (@RequestHeader("Authorization") String authorization,
-                                                                      @PathVariable("warehouseId") Integer warehouseId,
-                                                                      @PathVariable("searchParameter") String searchParameter,
-                                                                      @PathVariable("sortParameter") String sortParameter){
+                                                                      @RequestBody SearchSortParameterModel searchSortParameterModel){
 
-        SearchSortParameterModel searchSortParameterModel = new SearchSortParameterModel();
-        searchSortParameterModel.setWarehouseId(warehouseId);
-        searchSortParameterModel.setSearchParameter(searchParameter);
-        searchSortParameterModel.setSortParameter(sortParameter);
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -112,17 +103,13 @@ public class MovieController {
     // Ordenar por un criterio la lista de películas
 
     @RequestMapping(
-            path="/{warehouseId}/sort/{sortParameter}",
-            method = RequestMethod.GET,
+            value="sort",
+            method = RequestMethod.POST,
+            consumes =MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
     public ResponseEntity<ArrayList<MovieModel>> sortMoviesByParameter (@RequestHeader("Authorization") String authorization,
-                                                                        @PathVariable("warehouseId") Integer warehouseId,
-                                                                        @PathVariable("sortParameter") String sortParameter){
-
-        SortParameterModel sortParameterModel = new SortParameterModel();
-        sortParameterModel.setWarehouseId(warehouseId);
-        sortParameterModel.setSortParameter(sortParameter);
+                                                                        @RequestBody SortParameterModel sortParameterModel){
 
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
